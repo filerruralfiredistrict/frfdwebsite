@@ -220,10 +220,17 @@ All styles are in `css/style.css`. Key patterns:
 
 ### Documents plan (Google Drive):
 The current site hosts documents on Streamline/CloudFront. Replacement plan:
+- District uses their **existing Google account** (may be paid/Workspace) as the owner and storage for all documents
+- Share the folder with `frfdadmin@gmail.com` as **Viewer only** — provides backup access without risk of accidental deletion
+- Set folder to "Anyone with the link can view" so website visitors can open files without a Google login
 - Google Drive folder structure: Board Meetings → [Year] → agendas + minutes
 - Each document is a shared Google Drive link opening in a new tab
 - Documents section to be added to governance.html (Board Meetings section) and transparency.html
 - Consider adding a Documents collection to Decap CMS so staff can add new links without touching code
+
+### Questions to ask district:
+- Do you have an existing Google account / Google Workspace with storage?
+- Can you share the documents folder with frfdadmin@gmail.com as Viewer?
 
 ### Nice to have:
 - [ ] Real photos for news posts
