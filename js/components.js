@@ -83,6 +83,7 @@ const FOOTER_HTML = `
         <a href="/transparency.html">Transparency Report</a> &middot;
         <a href="/accessibility.html">Accessibility</a>
       </span>
+      <span>Website by <a href="https://beepfix.com" target="_blank" rel="noopener">BeepFix.com</a></span>
     </div>
   </div>
 </footer>`;
