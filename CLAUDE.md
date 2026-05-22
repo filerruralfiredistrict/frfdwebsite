@@ -213,17 +213,53 @@ All styles are in `css/style.css`. Key patterns:
 - [ ] **`data/posts.json`** — deprecated file, safe to delete once confirmed news.js GitHub API approach is working in production
 
 ### ⚠️ URGENT — Before cancelling Streamline:
-- [ ] **Download ALL existing documents** from filerfireandrescue.org before cancelling Streamline — agendas and minutes are hosted on Streamline's Amazon CloudFront CDN and will disappear when the account closes. Go to the Board Meetings page on the current site and download every agenda/minutes file for all years (2023, 2024, 2025, 2026).
-- [ ] Upload saved documents to a shared Google Drive folder (frfdadmin Google account, organized by year)
+- [ ] **Download ALL existing documents** from filerfireandrescue.org — hosted on Streamline's CloudFront CDN, will disappear when account closes (~71 files total, see inventory below)
+- [ ] **Locate the original District Certificate PDF** — currently only shown as a rendered image on Streamline, make sure the actual PDF file is saved somewhere
+- [ ] Upload saved documents to a shared Google Drive folder organized by year
 - [ ] Set the Google Drive folder to "Anyone with the link can view"
 - [ ] Build out the documents section on governance.html and transparency.html with links to Drive files
+
+### Document Inventory (from filerfireandrescue.org — must download before cancelling)
+
+**Board Meeting Documents (~66 files)**
+
+| Year | Files | Notes |
+|---|---|---|
+| 2026 | 5 agendas (Jan–May) | Mostly .docx format |
+| 2025 | 14 files — 8 agendas + 6 minutes | Mix of .docx and .pdf; includes Feb 21 special meeting and Feb 28 special meeting |
+| 2024 | 21 files — agendas + minutes most months | Mostly .pdf; Oct 2024 agenda URL is mislabeled as "OCTOBER+2023" |
+| 2023 | 26 files — agendas + minutes all months | All .pdf; includes a May 2023 DIFAC notice |
+
+⚠️ **2025 minutes are incomplete** — only January has minutes posted; rest of year is missing from the site  
+⚠️ **Mixed formats** — newer docs (2025–2026) are Word .docx, older ones are PDF  
+⚠️ **No documents older than January 2023** on the current site
+
+**Transparency / Financial Documents (5 files)**
+- `2022-2023 BUDGET SEPT1 UPDATE FINAL.pdf`
+- `2023-2024 BUDGET.pdf`
+- `2024-2025 Budget Paper.pdf`
+- `Filer Rural Fire Protection District - Audit FYE 09 30 2022.pdf`
+- District Certificate — **get original PDF, not the Streamline image version**
 
 ### Documents plan (Google Drive):
 The current site hosts documents on Streamline/CloudFront. Replacement plan:
 - District uses their **existing Google account** (may be paid/Workspace) as the owner and storage for all documents
 - Share the folder with `frfdadmin@gmail.com` as **Viewer only** — provides backup access without risk of accidental deletion
 - Set folder to "Anyone with the link can view" so website visitors can open files without a Google login
-- Google Drive folder structure: Board Meetings → [Year] → agendas + minutes
+- Suggested Google Drive folder structure:
+  ```
+  FRFD Documents/
+  ├── Board Meetings/
+  │   ├── 2023/ (agendas + minutes)
+  │   ├── 2024/ (agendas + minutes)
+  │   ├── 2025/ (agendas + minutes)
+  │   └── 2026/ (agendas + minutes)
+  ├── Financial/
+  │   ├── Budgets/
+  │   └── Audits/
+  └── Legal/
+      └── District Certificate
+  ```
 - Each document is a shared Google Drive link opening in a new tab
 - Documents section to be added to governance.html (Board Meetings section) and transparency.html
 - Consider adding a Documents collection to Decap CMS so staff can add new links without touching code
@@ -231,6 +267,8 @@ The current site hosts documents on Streamline/CloudFront. Replacement plan:
 ### Questions to ask district:
 - Do you have an existing Google account / Google Workspace with storage?
 - Can you share the documents folder with frfdadmin@gmail.com as Viewer?
+- Do you have the original District Certificate PDF saved locally?
+- Where are the missing 2025 meeting minutes (Feb–Nov)?
 
 ### Nice to have:
 - [ ] Real photos for news posts
