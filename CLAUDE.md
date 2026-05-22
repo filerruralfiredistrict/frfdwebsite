@@ -212,8 +212,20 @@ All styles are in `css/style.css`. Key patterns:
 - [ ] **Google Maps embed** — currently uses simple query URL; consider replacing with proper Maps Embed API key for better reliability
 - [ ] **`data/posts.json`** — deprecated file, safe to delete once confirmed news.js GitHub API approach is working in production
 
+### ⚠️ URGENT — Before cancelling Streamline:
+- [ ] **Download ALL existing documents** from filerfireandrescue.org before cancelling Streamline — agendas and minutes are hosted on Streamline's Amazon CloudFront CDN and will disappear when the account closes. Go to the Board Meetings page on the current site and download every agenda/minutes file for all years (2023, 2024, 2025, 2026).
+- [ ] Upload saved documents to a shared Google Drive folder (frfdadmin Google account, organized by year)
+- [ ] Set the Google Drive folder to "Anyone with the link can view"
+- [ ] Build out the documents section on governance.html and transparency.html with links to Drive files
+
+### Documents plan (Google Drive):
+The current site hosts documents on Streamline/CloudFront. Replacement plan:
+- Google Drive folder structure: Board Meetings → [Year] → agendas + minutes
+- Each document is a shared Google Drive link opening in a new tab
+- Documents section to be added to governance.html (Board Meetings section) and transparency.html
+- Consider adding a Documents collection to Decap CMS so staff can add new links without touching code
+
 ### Nice to have:
-- [ ] Board meeting agendas/minutes PDF uploads
 - [ ] Real photos for news posts
 - [ ] Consider adding staff/board management to Decap CMS if district wants self-service updates
 
