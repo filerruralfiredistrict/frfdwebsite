@@ -55,38 +55,30 @@ export async function onRequest(context) {
   <meta charset="UTF-8">
 </head>
 <body>
-<p>Authorizing...</p>
+<p id="status">Authorizing...</p>
 <script>
 (function () {
   const payload = ${successPayload};
+  document.getElementById('status').textContent = 'Token received: ' + payload.token.substring(0, 20) + '...';
 
-  // Try postMessage first (for Decap CMS)
-  try {
-    if (window.opener) {
+  // Send to parent window
+  if (window.opener) {
+    try {
       window.opener.postMessage(
         'authorization:github:success:' + JSON.stringify(payload),
         '*'
       );
-      setTimeout(function() {
-        window.close();
-      }, 500);
-      return;
+      document.getElementById('status').textContent = 'Auth sent to parent. Closing...';
+    } catch (e) {
+      document.getElementById('status').textContent = 'Error: ' + e.message;
     }
-  } catch (e) {
-    console.error('postMessage failed:', e);
+  } else {
+    document.getElementById('status').textContent = 'No parent window found';
   }
 
-  // Fallback: store in localStorage and redirect
-  try {
-    localStorage.setItem('decap.auth.token', payload.token);
-    localStorage.setItem('decap.auth.user', JSON.stringify({
-      token: payload.token,
-      provider: payload.provider
-    }));
-    window.location.href = '/admin/';
-  } catch (e) {
-    console.error('localStorage failed:', e);
-  }
+  setTimeout(function() {
+    window.close();
+  }, 2000);
 })();
 </script>
 </body>
