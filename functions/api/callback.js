@@ -45,22 +45,23 @@ export async function onRequest(context) {
     return errorPage('Failed to contact GitHub. Please try again.');
   }
 
-  // Return a page that sends the token back to the Decap CMS popup opener
-  const successPayload = JSON.stringify({ token, provider: 'github' });
-
+  // Store token in localStorage and redirect back to admin
   return new Response(
     `<!DOCTYPE html>
 <html>
 <body>
-<p>Authorizing...</p>
 <script>
-window.opener.postMessage(
-  'authorization:github:success:${successPayload}',
-  '*'
-);
-setTimeout(function() {
-  window.close();
-}, 500);
+(function() {
+  const token = '${token}';
+
+  // Store in multiple locations so Decap CMS can find it
+  try { localStorage.setItem('netlify_auth', JSON.stringify({ token, provider: 'github' })); } catch(e) {}
+  try { localStorage.setItem('decap.auth.user', JSON.stringify({ token, provider: 'github' })); } catch(e) {}
+  try { sessionStorage.setItem('decap-token', token); } catch(e) {}
+
+  // Redirect with token in hash
+  window.location.href = '/admin/#access_token=' + token + '&token_type=bearer';
+})();
 </script>
 </body>
 </html>`,
