@@ -126,8 +126,8 @@ nav a:hover, nav a.active { background: rgba(255,255,255,.12); text-decoration: 
   content: '';
   position: absolute;
   inset: 0;
-  background: url('../assets/images/hero-bg.jpg') center/cover no-repeat;
-  opacity: .15;
+  background: none;
+  opacity: .25;
 }
 .hero-content { position: relative; }
 .hero img.hero-logo { height: 140px; margin: 0 auto 1.5rem; }
@@ -171,12 +171,13 @@ nav a:hover, nav a.active { background: rgba(255,255,255,.12); text-decoration: 
   margin-top: 1.5rem;
 }
 .card {
-  background: var(--white);
-  border: 1px solid #e2e8f0;
+  background: rgba(255,255,255,.55);
+  border: 1px solid rgba(255,255,255,.6);
   border-radius: var(--radius);
   padding: 1.5rem;
   box-shadow: var(--shadow);
   transition: transform .15s, box-shadow .15s;
+  backdrop-filter: blur(2px);
 }
 .card:hover { transform: translateY(-3px); box-shadow: 0 6px 16px rgba(0,0,0,.1); }
 .card-icon { font-size: 2rem; margin-bottom: .75rem; }
@@ -371,6 +372,77 @@ footer ul a:hover { color: var(--white); text-decoration: none; }
 }
 .footer-bottom a { color: var(--gray); }
 .footer-bottom a:hover { color: var(--white); }
+
+/* ── Hero Split Layout ──────────────────────────────────── */
+.hero-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: 460px;
+}
+.hero-split .hero-left {
+  background: var(--navy);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 2.5rem;
+  text-align: center;
+}
+.hero-split .hero-left .hero-logo { height: 90px; margin-bottom: 1rem; }
+.hero-split .hero-left h1 { font-size: clamp(1.4rem, 2.5vw, 2rem); margin-bottom: .4rem; }
+.hero-split .hero-left p { font-size: .95rem; margin-bottom: 1.25rem; }
+.hero-split .hero-right {
+  position: relative;
+  overflow: hidden;
+}
+.hero-split .hero-right img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 35%;
+  display: block;
+}
+@media (max-width: 768px) {
+  .hero-split { grid-template-columns: 1fr; height: auto; }
+  .hero-split .hero-left { padding: 2.5rem 1.5rem; }
+  .hero-split .hero-right { height: 220px; }
+}
+
+/* ── Photo Strip ────────────────────────────────────────── */
+.photo-strip {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  overflow: hidden;
+}
+.photo-strip img {
+  width: 100%;
+  height: 460px;
+  object-fit: cover;
+  object-position: center center;
+}
+@media (max-width: 768px) {
+  .photo-strip { grid-template-columns: 1fr; }
+}
+.photo-strip-single {
+  position: relative;
+  margin-bottom: -320px;
+}
+.photo-strip-single img {
+  width: 100%;
+  height: 900px;
+  object-fit: cover;
+  object-position: center 35%;
+  display: block;
+}
+.photo-strip-single::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 45%;
+  background: linear-gradient(to bottom, transparent, #ffffff);
+  pointer-events: none;
+}
 
 /* ── Image + Text Split Layout ─────────────────────────── */
 .history-split {
