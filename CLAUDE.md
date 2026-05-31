@@ -26,8 +26,8 @@ A static website for **Filer Rural Fire District, Station 26**, located in Filer
 | Decap CMS | `/admin` on live site | Browser-based news editor for district staff |
 
 **Dev repo (Andrew Cameron):** revcam/frfd — kept as backup/working copy  
-**Live URL:** frfdwebsite.pages.dev (temporary — real domain TBD)  
-**Real domain:** filerfireandrescue.org (registered on Namecheap, domain ownership to be confirmed with district)
+**Staging URL:** https://frfdwebsite.pages.dev (live and working)  
+**Real domain:** filerfireandrescue.org (registered on Namecheap — pending connection to Cloudflare Pages)
 
 ---
 
@@ -200,89 +200,66 @@ All styles are in `css/style.css`. Key patterns:
 
 ## Pending Items (as of May 2026)
 
-### Needs district confirmation:
-- [ ] **EMS/EMT content** — verify if FRFD operates EMS or if it's a separate unit. If separate, remove EMS references from services.html, index.html hero cards, and history.html
-- [ ] **Board meeting schedule** — governance.html has `[day of month]` and `[time]` placeholders
-- [ ] **Assistant Chief name** — governance.html staff section shows "Assistant Chief" with no name
-- [ ] **Web3Forms email** — confirm destination email (district Gmail vs chief@filerruralfire.com)
+### Waiting on domain / go-live:
+- [ ] **Real domain** — connect filerfireandrescue.org (Namecheap) to Cloudflare Pages, update GitHub OAuth App callback URL from `frfdwebsite.pages.dev/api/callback` to real domain
+- [ ] **Web3Forms access key** — replace `YOUR_WEB3FORMS_ACCESS_KEY` in contact.html and volunteer.html (holding until real domain is live)
+- [ ] **base_url in admin/config.yml** — update from `https://frfdwebsite.pages.dev` to real domain after go-live
 
-### Technical:
-- [ ] **Web3Forms access key** — replace `YOUR_WEB3FORMS_ACCESS_KEY` in contact.html and volunteer.html
-- [ ] **Real domain** — confirm district controls filerfireandrescue.org on Namecheap, then connect to Cloudflare Pages and update GitHub OAuth App callback URL
-- [ ] **Google Maps embed** — currently uses simple query URL; consider replacing with proper Maps Embed API key for better reliability
-- [ ] **`data/posts.json`** — deprecated file, safe to delete once confirmed news.js GitHub API approach is working in production
-
-### ⚠️ URGENT — Before cancelling Streamline:
-- [ ] **Download ALL existing documents** from filerfireandrescue.org — hosted on Streamline's CloudFront CDN, will disappear when account closes (~71 files total, see inventory below)
-- [ ] **Locate the original District Certificate PDF** — currently only shown as a rendered image on Streamline, make sure the actual PDF file is saved somewhere
-- [ ] Upload saved documents to a shared Google Drive folder organized by year
-- [ ] Set the Google Drive folder to "Anyone with the link can view"
-- [ ] Build out the documents section on governance.html and transparency.html with links to Drive files
-
-### Document Inventory (from filerfireandrescue.org — must download before cancelling)
-
-**Board Meeting Documents (~66 files)**
-
-| Year | Files | Notes |
-|---|---|---|
-| 2026 | 5 agendas (Jan–May) | Mostly .docx format |
-| 2025 | 14 files — 8 agendas + 6 minutes | Mix of .docx and .pdf; includes Feb 21 special meeting and Feb 28 special meeting |
-| 2024 | 21 files — agendas + minutes most months | Mostly .pdf; Oct 2024 agenda URL is mislabeled as "OCTOBER+2023" |
-| 2023 | 26 files — agendas + minutes all months | All .pdf; includes a May 2023 DIFAC notice |
-
-⚠️ **2025 minutes are incomplete** — only January has minutes posted; rest of year is missing from the site  
-⚠️ **Mixed formats** — newer docs (2025–2026) are Word .docx, older ones are PDF  
-⚠️ **No documents older than January 2023** on the current site
-
-**Transparency / Financial Documents (5 files)**
-- `2022-2023 BUDGET SEPT1 UPDATE FINAL.pdf`
-- `2023-2024 BUDGET.pdf`
-- `2024-2025 Budget Paper.pdf`
-- `Filer Rural Fire Protection District - Audit FYE 09 30 2022.pdf`
-- District Certificate — **get original PDF, not the Streamline image version**
-
-### Documents plan (Google Drive):
-The current site hosts documents on Streamline/CloudFront. Replacement plan:
-- District uses their **existing Google account** (may be paid/Workspace) as the owner and storage for all documents
-- Share the folder with `frfdadmin@gmail.com` as **Viewer only** — provides backup access without risk of accidental deletion
-- Set folder to "Anyone with the link can view" so website visitors can open files without a Google login
-- Suggested Google Drive folder structure:
-  ```
-  FRFD Documents/
-  ├── Board Meetings/
-  │   ├── 2023/ (agendas + minutes)
-  │   ├── 2024/ (agendas + minutes)
-  │   ├── 2025/ (agendas + minutes)
-  │   └── 2026/ (agendas + minutes)
-  ├── Financial/
-  │   ├── Budgets/
-  │   └── Audits/
-  └── Legal/
-      └── District Certificate
-  ```
-- Each document is a shared Google Drive link opening in a new tab
-- Documents section to be added to governance.html (Board Meetings section) and transparency.html
-- Consider adding a Documents collection to Decap CMS so staff can add new links without touching code
-
-### Questions to ask district:
-- Do you have an existing Google account / Google Workspace with storage?
-- Can you share the documents folder with frfdadmin@gmail.com as Viewer?
-- Do you have the original District Certificate PDF saved locally?
-- Where are the missing 2025 meeting minutes (Feb–Nov)?
+### Waiting on district:
+- [ ] **Assistant Chief name** — data/staff.json has empty name field, update via /admin when confirmed
+- [ ] **Upload documents to Google Drive** — download-docs.sh saves files to ~/FRFD-Documents, needs uploading to the shared Drive folders
+- [ ] **Budget document** — district advised budget posted after September FY approval; link at governance.html financial section already points to Drive folder
 
 ### Nice to have:
-- [ ] Real photos for news posts
-- [ ] Consider adding staff/board management to Decap CMS if district wants self-service updates
+- [ ] **Google Maps embed** — contact page uses basic query URL, could use proper Embed API
+- [ ] **Volunteer staff section** — data/staff.json pattern is ready, add volunteers collection when district is ready
+- [ ] **Staff/board photos** — CMS supports optional photos, district just needs to upload headshots via /admin
+
+### ✅ Confirmed by district:
+- District DOES operate their own EMS — keep all EMS content
+- Meeting minutes are NOT required to be published — available on request only
+- Budget is NOT required to be published — will post after September approval
+- Board meetings: second Monday of each month, 7:00 PM, Commissioner's Room
+
+---
+
+## CMS-Managed Content (via /admin)
+
+All of the following update automatically when changed in the CMS — no code edits needed:
+
+| Section | CMS Location | File |
+|---|---|---|
+| News posts | News & Updates | `_posts/*.md` |
+| Alert banner | Site Settings → Alert Banner | `data/alert.json` |
+| Board members | Site Settings → Board Members | `data/board-members.json` |
+| Staff directory | Site Settings → Staff Directory | `data/staff.json` |
+| Meeting year folders | Site Settings → Meeting Year Folders | `data/meeting-years.json` |
+
+**To add 2027 meeting agendas:** Create Drive folder → /admin → Site Settings → Meeting Year Folders → Add entry → Save.
+
+---
+
+## Google Drive Document Folders
+
+| Folder | Link |
+|---|---|
+| 2026 Meeting Agendas | https://drive.google.com/drive/folders/122EHIm6ErghRZm-Q9z9HRWwcEXza7yLV |
+| 2025 Meeting Agendas | https://drive.google.com/drive/folders/1RTyJirc-twlPL05TYE9zjd-Eux0PhqnO |
+| 2024 Meeting Agendas | https://drive.google.com/drive/folders/1OAlqxRkSJSubfT8Egf9uWGKg1nf6s_K2 |
+| 2023 Meeting Agendas | https://drive.google.com/drive/folders/1aaZFcTeBdyktoZs4rFr3CvEJfCnC4Pq0 |
+| Financial Documents | https://drive.google.com/drive/folders/1c5FJw5QqRctPX-mh5wNPNDAONZbSQmrH |
+
+Download script for old Streamline docs: `~/frfdwebsite/download-docs.sh` → saves to `~/FRFD-Documents/`
 
 ---
 
 ## Board Members (current)
 
-| Name | Role | Phone | Address |
-|---|---|---|---|
-| Gordon Lancaster | Fire Commissioner — President | (208) 326-4111 | PO Box 227, Filer, ID 83328 |
-| Richard Fillmore | Fire Commissioner | (208) 326-4111 | PO Box 227, Filer, ID 83328 |
-| Blaine Wright | Fire Commissioner | (208) 326-4111 | PO Box 227, Filer, ID 83328 |
+| Name | Role | Phone |
+|---|---|---|
+| Gordon Lancaster | Fire Commissioner — President | (208) 280-2269 |
+| Richard Fillmore | Fire Commissioner | (208) 420-0542 |
+| Blayne Wright | Fire Commissioner | (208) 731-5152 |
 
 ## Staff (current)
 
