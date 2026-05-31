@@ -163,6 +163,29 @@ Set `"active": false` to hide it. Managed via Decap CMS → Site Settings → Al
 
 **GitHub OAuth App callback URL must match the live domain.** When the real domain is connected, update the OAuth App's callback URL to `https://REALDOMAIN.org/api/callback`.
 
+### Managing CMS Access
+
+CMS access is restricted to authorized GitHub users in `admin/config.yml`. Currently authorized:
+- `frfdadmin`
+- `revcam`
+
+**To add a new user:**
+1. Go to https://github.com/frfdadmin/frfdwebsite/blob/main/admin/config.yml
+2. Click the pencil icon (✎) to edit
+3. Find the `authorize:` section and add a new line with the GitHub username, e.g.:
+   ```yaml
+   authorize:
+     - frfdadmin
+     - revcam
+     - newusername
+   ```
+4. Click "Commit changes" and confirm
+5. The site automatically redeploys — the new user can now log in
+
+**To remove a user:** Follow the same steps, but delete their line from the `authorize:` list.
+
+Only users in this list can access the CMS. Anyone else attempting to log in will be denied.
+
 ---
 
 ## Shared Header & Footer
