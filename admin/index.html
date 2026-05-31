@@ -185,9 +185,29 @@
       // Listen for auth success message from popup
       window.addEventListener('message', (e) => {
         if (typeof e.data === 'string' && e.data.startsWith('authorization:github:success:')) {
-          popup.close();
-          // Reload to get updated auth state
-          location.reload();
+          try {
+            // Parse the token from the message
+            const jsonStr = e.data.substring('authorization:github:success:'.length);
+            const payload = JSON.parse(jsonStr);
+
+            // Store in localStorage in the format Decap CMS expects
+            const authUser = {
+              token: payload.token,
+              provider: payload.provider,
+              github: {
+                login: 'github-user' // Placeholder, will be fetched when needed
+              }
+            };
+            localStorage.setItem('decap.auth.user', JSON.stringify(authUser));
+            localStorage.setItem('decap.auth.token', payload.token);
+
+            popup.close();
+            // Reload to show logged-in state
+            location.reload();
+          } catch (err) {
+            console.error('Auth error:', err);
+            alert('Authentication failed. Please try again.');
+          }
         }
       });
     }
