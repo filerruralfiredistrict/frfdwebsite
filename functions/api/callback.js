@@ -58,17 +58,18 @@ export async function onRequest(context) {
 <p>Authorizing...</p>
 <script>
 (function () {
+  const payload = ${successPayload};
+
   // Try postMessage first (for Decap CMS)
   try {
     if (window.opener) {
       window.opener.postMessage(
-        'authorization:github:success:${successPayload}',
+        'authorization:github:success:' + JSON.stringify(payload),
         '*'
       );
       setTimeout(function() {
         window.close();
       }, 500);
-      // Message sent, stop here
       return;
     }
   } catch (e) {
@@ -77,10 +78,10 @@ export async function onRequest(context) {
 
   // Fallback: store in localStorage and redirect
   try {
-    localStorage.setItem('decap.auth.token', '${token}');
+    localStorage.setItem('decap.auth.token', payload.token);
     localStorage.setItem('decap.auth.user', JSON.stringify({
-      token: '${token}',
-      provider: 'github'
+      token: payload.token,
+      provider: payload.provider
     }));
     window.location.href = '/admin/';
   } catch (e) {
