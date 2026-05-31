@@ -3,9 +3,210 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Content Manager – Filer Rural Fire District</title>
+  <title>CMS Admin – Filer Rural Fire District</title>
+  <link rel="icon" href="/assets/images/logo.png" type="image/png">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: linear-gradient(135deg, #1D2B3A 0%, #2C3E50 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+    #login-page {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+      max-width: 500px;
+      width: 100%;
+      padding: 3rem 2rem;
+      text-align: center;
+      display: none;
+    }
+    #login-page.show { display: block; }
+    .logo {
+      height: 60px;
+      margin-bottom: 1.5rem;
+    }
+    h1 {
+      color: #1D2B3A;
+      font-size: 1.75rem;
+      margin-bottom: 0.5rem;
+    }
+    .subtitle {
+      color: #A8B8C4;
+      font-size: 0.9rem;
+      margin-bottom: 2rem;
+    }
+    .status-box {
+      background: #F4F6F8;
+      border-left: 4px solid #CC2020;
+      padding: 1.5rem;
+      border-radius: 4px;
+      margin-bottom: 2rem;
+      text-align: left;
+    }
+    .status-label {
+      color: #A8B8C4;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.5rem;
+    }
+    .status-value {
+      color: #1D2B3A;
+      font-size: 1.1rem;
+      font-weight: 600;
+      word-break: break-all;
+    }
+    .button-group {
+      display: flex;
+      gap: 1rem;
+      flex-direction: column;
+    }
+    button {
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 4px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: opacity 0.15s;
+    }
+    button:hover {
+      opacity: 0.85;
+    }
+    .btn-primary {
+      background: #CC2020;
+      color: white;
+    }
+    .btn-outline {
+      border: 2px solid #A8B8C4;
+      color: #1D2B3A;
+      background: white;
+    }
+    .loading {
+      color: #A8B8C4;
+      font-style: italic;
+      padding: 2rem 1rem;
+    }
+    #cms-container {
+      width: 100%;
+      height: 100vh;
+    }
+  </style>
 </head>
 <body>
-  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+
+  <!-- Login Page -->
+  <div id="login-page">
+    <img src="/assets/images/logo.png" alt="Filer Rural Fire District" class="logo">
+    <h1>CMS Admin</h1>
+    <p class="subtitle">Filer Rural Fire District</p>
+
+    <div id="content">
+      <div class="loading">Checking login status...</div>
+    </div>
+  </div>
+
+  <!-- CMS Container (shown when logged in) -->
+  <div id="cms-container"></div>
+
+  <script>
+    function getAuthUser() {
+      try {
+        const user = localStorage.getItem('decap.auth.user');
+        return user ? JSON.parse(user) : null;
+      } catch {
+        return null;
+      }
+    }
+
+    function getGithubUsername() {
+      const user = getAuthUser();
+      return user?.github?.login || user?.name || 'Unknown';
+    }
+
+    function renderLoggedIn() {
+      const username = getGithubUsername();
+      const content = document.getElementById('content');
+      content.innerHTML = `
+        <div class="status-box">
+          <div class="status-label">Logged in as</div>
+          <div class="status-value">@${username}</div>
+        </div>
+        <div class="button-group">
+          <button class="btn-primary" onclick="loadCMS()">
+            Enter CMS →
+          </button>
+          <button class="btn-outline" onclick="logout()">
+            Log Out
+          </button>
+        </div>
+      `;
+    }
+
+    function renderLoggedOut() {
+      const content = document.getElementById('content');
+      content.innerHTML = `
+        <div class="status-box" style="border-left-color:#A8B8C4;background:#f9fafb;">
+          <div class="status-label">Status</div>
+          <div class="status-value" style="color:#666;">Not logged in</div>
+        </div>
+        <div class="button-group">
+          <button class="btn-primary" onclick="login()">
+            Log in with GitHub
+          </button>
+        </div>
+        <p style="color:#A8B8C4;font-size:0.85rem;margin-top:2rem;">
+          Only authorized users can access the CMS.
+        </p>
+      `;
+    }
+
+    function login() {
+      window.location.href = '/api/auth';
+    }
+
+    function logout() {
+      if (confirm('Are you sure you want to log out?')) {
+        localStorage.removeItem('decap.auth.user');
+        localStorage.removeItem('decap.auth.token');
+        location.reload();
+      }
+    }
+
+    function loadCMS() {
+      // Hide login page, show CMS
+      document.getElementById('login-page').style.display = 'none';
+
+      // Load Decap CMS script
+      const script = document.createElement('script');
+      script.src = 'https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js';
+      document.body.appendChild(script);
+    }
+
+    // Check auth status on load
+    document.addEventListener('DOMContentLoaded', () => {
+      const loginPage = document.getElementById('login-page');
+      const user = getAuthUser();
+
+      if (user) {
+        // User is logged in
+        loginPage.classList.add('show');
+        renderLoggedIn();
+      } else {
+        // User is not logged in
+        loginPage.classList.add('show');
+        renderLoggedOut();
+      }
+    });
+  </script>
+
 </body>
 </html>
