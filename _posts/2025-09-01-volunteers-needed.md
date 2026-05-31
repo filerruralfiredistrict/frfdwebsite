@@ -2,7 +2,7 @@
 title: Volunteers Needed — Join Your Local Fire District
 date: "2025-09-01"
 excerpt: Filer Rural Fire District is actively recruiting volunteer firefighters. No experience necessary — we provide full training.
-image: "https://streamline.imgix.net/6732e00f-3ea5-45e0-b6d0-005db674ec53/839251f4-97be-4494-95e8-77a2aeb9ae01/Tree%20fire.jpg"
+image: "/assets/images/uploads/volunteers-tree-fire.jpg"
 ---
 
 Filer Rural Fire District is actively recruiting volunteer firefighters to serve our community. We currently operate with one full-time staff member and approximately 30 paid on-call volunteers — and we need more dedicated people to join our team.
