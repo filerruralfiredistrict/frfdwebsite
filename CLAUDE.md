@@ -156,14 +156,16 @@ Set `"active": false` to hide it. Managed via Decap CMS → Site Settings → Al
 ## How Decap CMS Works
 
 - URL: `https://frfdwebsite.pages.dev/admin`
-- Login: GitHub OAuth (frfdadmin account)
-- OAuth flow: `/api/auth` → GitHub → `/api/callback` → token → CMS
+- Login: GitHub OAuth via Decap CMS
+- OAuth flow: Click "Login with GitHub" → `/api/auth` → GitHub → `/api/callback` → token → CMS
 
 **Environment variables required in Cloudflare Pages:**
-- `GITHUB_CLIENT_ID` — from GitHub OAuth App (frfdadmin account → Settings → Developer settings → OAuth Apps)
+- `GITHUB_CLIENT_ID` — from GitHub OAuth App (Settings → Developer settings → OAuth Apps)
 - `GITHUB_CLIENT_SECRET` — same OAuth App
 
-**GitHub OAuth App callback URL must match the live domain.** When the real domain is connected, update the OAuth App's callback URL to `https://REALDOMAIN.org/api/callback`.
+These must be set for the OAuth flow to work. Without them, login will fail.
+
+**GitHub OAuth App callback URL must match.** Currently: `https://frfdwebsite.pages.dev/api/callback`. When the real domain is connected, update the OAuth App's callback URL to `https://REALDOMAIN.org/api/callback`.
 
 ### Managing CMS Access
 
