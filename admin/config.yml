@@ -82,6 +82,8 @@ collections:
       - label: Board Members
         name: board_members
         file: data/board-members.json
+        media_folder: /assets/images/staff
+        public_folder: /assets/images/staff
         fields:
           - label: Board Members
             name: items
@@ -109,6 +111,8 @@ collections:
       - label: Staff Directory
         name: staff
         file: data/staff.json
+        media_folder: /assets/images/staff
+        public_folder: /assets/images/staff
         fields:
           - label: Staff Members
             name: items
