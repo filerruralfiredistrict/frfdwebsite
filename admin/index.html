@@ -240,20 +240,31 @@
             const jsonStr = e.data.substring('authorization:github:success:'.length);
             const payload = JSON.parse(jsonStr);
 
-            // Store in localStorage in the format Decap CMS expects
-            const authUser = {
-              token: payload.token,
-              provider: payload.provider,
-              github: {
-                login: 'github-user' // Placeholder, will be fetched when needed
-              }
-            };
-            localStorage.setItem('decap.auth.user', JSON.stringify(authUser));
-            localStorage.setItem('decap.auth.token', payload.token);
+            // Fetch GitHub user info using the token
+            fetch('https://api.github.com/user', {
+              headers: { 'Authorization': 'token ' + payload.token }
+            })
+            .then(res => res.json())
+            .then(githubUser => {
+              // Store in localStorage in the format Decap CMS expects
+              const authUser = {
+                token: payload.token,
+                provider: payload.provider,
+                github: {
+                  login: githubUser.login
+                }
+              };
+              localStorage.setItem('decap.auth.user', JSON.stringify(authUser));
+              localStorage.setItem('decap.auth.token', payload.token);
 
-            popup.close();
-            // Reload to show logged-in state
-            location.reload();
+              popup.close();
+              // Reload to show logged-in state
+              location.reload();
+            })
+            .catch(err => {
+              console.error('Failed to fetch GitHub user:', err);
+              alert('Could not retrieve user info. Please try again.');
+            });
           } catch (err) {
             console.error('Auth error:', err);
             alert('Authentication failed. Please try again.');
