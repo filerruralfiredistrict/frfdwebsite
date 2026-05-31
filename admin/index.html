@@ -106,9 +106,50 @@
       font-style: italic;
       padding: 2rem 1rem;
     }
+    #user-header {
+      background: #1D2B3A;
+      color: white;
+      padding: 1rem 1.5rem;
+      display: none;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.9rem;
+      border-bottom: 1px solid #0a1117;
+    }
+    #user-header.show {
+      display: flex;
+    }
+    #user-header .user-info {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    #user-header .logout-btn {
+      background: transparent;
+      border: 1px solid #A8B8C4;
+      color: #A8B8C4;
+      padding: 0.4rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: all 0.15s;
+    }
+    #user-header .logout-btn:hover {
+      border-color: #CC2020;
+      color: #CC2020;
+    }
   </style>
 </head>
 <body>
+
+  <!-- User Info Header (shown when logged in) -->
+  <div id="user-header">
+    <div class="user-info">
+      <span>Logged in as</span>
+      <strong id="username"></strong>
+    </div>
+    <button class="logout-btn" onclick="logout()">Log Out</button>
+  </div>
 
   <!-- Login Page -->
   <div id="login-page">
@@ -139,6 +180,12 @@
     function renderLoggedIn() {
       const username = getGithubUsername();
       const content = document.getElementById('content');
+
+      // Show user header
+      const userHeader = document.getElementById('user-header');
+      document.getElementById('username').textContent = '@' + username;
+      userHeader.classList.add('show');
+
       content.innerHTML = `
         <div class="status-box">
           <div class="status-label">Logged in as</div>
@@ -219,6 +266,7 @@
       if (confirm('Are you sure you want to log out?')) {
         localStorage.removeItem('decap.auth.user');
         localStorage.removeItem('decap.auth.token');
+        document.getElementById('user-header').classList.remove('show');
         location.reload();
       }
     }
