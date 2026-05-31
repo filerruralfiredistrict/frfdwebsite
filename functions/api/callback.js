@@ -58,20 +58,34 @@ export async function onRequest(context) {
 <p>Authorizing, please wait...</p>
 <script>
 (function () {
+  const payload = ${successPayload};
+
+  // Store the token in localStorage for the parent to detect
   try {
-    // Send token to parent window for Decap CMS
-    window.opener.postMessage(
-      'authorization:github:success:${successPayload}',
-      '*'
-    );
-    console.log('Token sent to parent');
+    localStorage.setItem('netlify_auth', JSON.stringify({
+      user: { login: 'github-user' },
+      token: payload.token
+    }));
+    localStorage.setItem('netlify_auth:github:token', payload.token);
+    console.log('Auth stored in localStorage');
   } catch (e) {
-    console.error('Error sending token:', e);
+    console.error('Error storing auth:', e);
   }
-  // Close popup after a moment
+
+  // Try to notify parent window
+  try {
+    if (window.opener) {
+      window.opener.postMessage({ type: 'auth-complete' }, '*');
+      console.log('Sent auth-complete message');
+    }
+  } catch (e) {
+    console.error('Error sending message:', e);
+  }
+
+  // Close popup
   setTimeout(function() {
     window.close();
-  }, 1000);
+  }, 500);
 })();
 </script>
 </body>

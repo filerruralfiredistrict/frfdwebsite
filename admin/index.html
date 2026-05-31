@@ -95,18 +95,28 @@
         `width=${width},height=${height},left=${left},top=${top}`
       );
 
-      // Wait for successful auth
-      const checkAuth = setInterval(() => {
-        try {
-          // Check if popup closed (auth completed)
-          if (popup.closed) {
-            clearInterval(checkAuth);
-            // Give a moment for localStorage to be updated, then reload
-            setTimeout(() => location.reload(), 100);
-          }
-        } catch (e) {
-          // Ignore errors from cross-origin popup access
+      // Listen for auth completion message
+      window.addEventListener('message', function handleAuth(e) {
+        if (e.data && e.data.type === 'auth-complete') {
+          window.removeEventListener('message', handleAuth);
+          // Auth complete, reload to load CMS
+          setTimeout(() => location.reload(), 500);
         }
+      });
+
+      // Also check if popup closed
+      const checkClosed = setInterval(() => {
+        try {
+          if (popup && popup.closed) {
+            clearInterval(checkClosed);
+            // Popup closed, check if auth succeeded
+            setTimeout(() => {
+              if (localStorage.getItem('netlify_auth') || localStorage.getItem('netlify_auth:github:token')) {
+                location.reload();
+              }
+            }, 200);
+          }
+        } catch (e) {}
       }, 500);
     }
 
