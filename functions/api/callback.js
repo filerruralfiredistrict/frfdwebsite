@@ -45,31 +45,22 @@ export async function onRequest(context) {
     return errorPage('Failed to contact GitHub. Please try again.');
   }
 
-  // Store token in session storage and redirect back to admin
-  // Decap CMS will pick it up from there
+  // Return a page that sends the token back to the Decap CMS popup opener
+  const successPayload = JSON.stringify({ token, provider: 'github' });
+
   return new Response(
     `<!DOCTYPE html>
 <html>
-<head>
-  <meta charset="UTF-8">
-</head>
 <body>
+<p>Authorizing...</p>
 <script>
-(function () {
-  const token = '${token}';
-
-  // Store in session storage
-  try {
-    sessionStorage.setItem('decap-cms-auth-token', token);
-  } catch (e) {
-    try {
-      localStorage.setItem('decap-cms-auth-token', token);
-    } catch (e2) {}
-  }
-
-  // Redirect back to admin with token in hash
-  window.location.href = '/admin/#/login?token=' + encodeURIComponent(token);
-})();
+window.opener.postMessage(
+  'authorization:github:success:${successPayload}',
+  '*'
+);
+setTimeout(function() {
+  window.close();
+}, 500);
 </script>
 </body>
 </html>`,
@@ -84,7 +75,7 @@ function errorPage(message) {
 <body>
 <h2>Authorization failed</h2>
 <p>${message}</p>
-<p>Close this window and try again, or contact your site administrator.</p>
+<p>Close this window and try again.</p>
 </body>
 </html>`,
     { status: 400, headers: { 'Content-Type': 'text/html' } }
