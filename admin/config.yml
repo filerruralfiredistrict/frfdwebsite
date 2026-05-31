@@ -79,6 +79,65 @@ collections:
             required: false
             hint: "e.g. Learn more"
 
+      - label: Board Members
+        name: board_members
+        file: data/board-members.json
+        fields:
+          - label: Board Members
+            name: items
+            widget: list
+            summary: "{{fields.name}} — {{fields.role}}"
+            fields:
+              - label: Name
+                name: name
+                widget: string
+              - label: Role
+                name: role
+                widget: string
+                hint: "e.g. Fire Commissioner — President"
+              - label: Phone
+                name: phone
+                widget: string
+                required: false
+                hint: "e.g. (208) 280-2269"
+              - label: Photo
+                name: photo
+                widget: image
+                required: false
+                hint: "Optional headshot or uniform photo"
+
+      - label: Staff Directory
+        name: staff
+        file: data/staff.json
+        fields:
+          - label: Staff Members
+            name: items
+            widget: list
+            summary: "{{fields.name}} — {{fields.role}}"
+            fields:
+              - label: Name
+                name: name
+                widget: string
+                required: false
+                hint: "Leave blank if name is not yet available"
+              - label: Role
+                name: role
+                widget: string
+                hint: "e.g. Fire Chief"
+              - label: Phone
+                name: phone
+                widget: string
+                required: false
+              - label: Email
+                name: email
+                widget: string
+                required: false
+              - label: Photo
+                name: photo
+                widget: image
+                required: false
+                hint: "Optional headshot or uniform photo"
+
       - label: Meeting Year Folders
         name: meeting_years
         file: data/meeting-years.json

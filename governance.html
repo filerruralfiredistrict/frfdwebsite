@@ -25,34 +25,8 @@
     <div class="container">
       <h2 class="section-title">Board Members</h2>
       <p style="margin-bottom:1.5rem;color:#64748b;">Filer Rural Fire District is governed by an elected Board of Fire Commissioners responsible for policy, budget, and oversight of district operations.</p>
-      <div class="staff-grid">
-        <div class="staff-card">
-          <div class="staff-avatar">👤</div>
-          <div class="staff-name">Gordon Lancaster</div>
-          <div class="staff-role">Fire Commissioner — President</div>
-          <div style="margin-top:.75rem;font-size:.8rem;color:#64748b;line-height:1.6;">
-            <div><a href="tel:+12082802269">(208) 280-2269</a></div>
-            <div>100 US-30, Filer, ID 83328</div>
-          </div>
-        </div>
-        <div class="staff-card">
-          <div class="staff-avatar">👤</div>
-          <div class="staff-name">Richard Fillmore</div>
-          <div class="staff-role">Fire Commissioner</div>
-          <div style="margin-top:.75rem;font-size:.8rem;color:#64748b;line-height:1.6;">
-            <div><a href="tel:+12084200542">(208) 420-0542</a></div>
-            <div>100 US-30, Filer, ID 83328</div>
-          </div>
-        </div>
-        <div class="staff-card">
-          <div class="staff-avatar">👤</div>
-          <div class="staff-name">Blayne Wright</div>
-          <div class="staff-role">Fire Commissioner</div>
-          <div style="margin-top:.75rem;font-size:.8rem;color:#64748b;line-height:1.6;">
-            <div><a href="tel:+12087315152">(208) 731-5152</a></div>
-            <div>100 US-30, Filer, ID 83328</div>
-          </div>
-        </div>
+      <div class="staff-grid" id="board-members-grid">
+        <p style="color:#94a3b8;font-size:.9rem;">Loading…</p>
       </div>
     </div>
   </section>
@@ -81,26 +55,8 @@
   <section class="section" id="staff">
     <div class="container">
       <h2 class="section-title">Staff Directory</h2>
-      <div class="staff-grid">
-        <div class="staff-card">
-          <div class="staff-avatar">🪖</div>
-          <div class="staff-name">Phil Roberts</div>
-          <div class="staff-role">Fire Chief</div>
-          <div style="margin-top:.75rem;font-size:.8rem;color:#64748b;line-height:1.8;">
-            <div><a href="tel:+12086132988">(208) 613-2988</a></div>
-            <div><a href="mailto:chief@filerruralfire.com">chief@filerruralfire.com</a></div>
-            <div>100 US-30, Filer, ID 83328</div>
-          </div>
-        </div>
-        <div class="staff-card">
-          <div class="staff-avatar">🪖</div>
-          <div class="staff-name">Assistant Chief</div>
-          <div class="staff-role">Assistant Chief</div>
-          <div style="margin-top:.75rem;font-size:.8rem;color:#64748b;line-height:1.8;">
-            <div><a href="mailto:asstchief@filerfireandrescue.org">asstchief@filerfireandrescue.org</a></div>
-            <div>100 US-30, Filer, ID 83328</div>
-          </div>
-        </div>
+      <div class="staff-grid" id="staff-grid">
+        <p style="color:#94a3b8;font-size:.9rem;">Loading…</p>
       </div>
     </div>
   </section>
@@ -133,6 +89,40 @@
   <script src="/js/components.js"></script>
   <script src="/js/main.js"></script>
   <script>
+    function staffCard(person, isBoard) {
+      const avatar = person.photo
+        ? `<img class="staff-photo" src="${person.photo}" alt="${person.name}">`
+        : `<div class="staff-avatar">${isBoard ? '👤' : '🪖'}</div>`;
+      const displayName = person.name || person.role;
+      const phone = person.phone
+        ? `<div><a href="tel:+1${person.phone.replace(/\D/g,'')}">${person.phone}</a></div>` : '';
+      const email = person.email
+        ? `<div><a href="mailto:${person.email}">${person.email}</a></div>` : '';
+      return `
+        <div class="staff-card" style="text-align:center;">
+          ${avatar}
+          <div class="staff-name">${displayName}</div>
+          <div class="staff-role">${person.role}</div>
+          <div style="margin-top:.75rem;font-size:.8rem;color:#64748b;line-height:1.8;">
+            ${phone}${email}
+          </div>
+        </div>`;
+    }
+
+    fetch('/data/board-members.json')
+      .then(r => r.json())
+      .then(data => {
+        document.getElementById('board-members-grid').innerHTML =
+          (data.items || data).map(p => staffCard(p, true)).join('');
+      });
+
+    fetch('/data/staff.json')
+      .then(r => r.json())
+      .then(data => {
+        document.getElementById('staff-grid').innerHTML =
+          (data.items || data).map(p => staffCard(p, false)).join('');
+      });
+
     fetch('/data/meeting-years.json')
       .then(r => r.json())
       .then(data => {

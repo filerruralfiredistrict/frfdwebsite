@@ -1,0 +1,18 @@
+{
+  "items": [
+    {
+      "name": "Phil Roberts",
+      "role": "Fire Chief",
+      "phone": "(208) 613-2988",
+      "email": "chief@filerruralfire.com",
+      "photo": ""
+    },
+    {
+      "name": "",
+      "role": "Assistant Chief",
+      "phone": "",
+      "email": "asstchief@filerfireandrescue.org",
+      "photo": ""
+    }
+  ]
+}
