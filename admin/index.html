@@ -10,11 +10,128 @@
     html, body { width: 100%; height: 100%; }
     body {
       font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: linear-gradient(135deg, #1D2B3A 0%, #2C3E50 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+    body.cms-mode {
       background: white;
+      display: block;
+      padding: 0;
+    }
+    .login-container {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+      width: 90vw;
+      max-width: 500px;
+      padding: 3rem 2rem;
+      text-align: center;
+    }
+    .logo {
+      height: 80px;
+      width: 80px;
+      margin: 0 auto 1.5rem;
+      object-fit: contain;
+    }
+    h1 {
+      color: #1D2B3A;
+      font-size: 1.75rem;
+      margin-bottom: 0.5rem;
+    }
+    .subtitle {
+      color: #A8B8C4;
+      font-size: 0.9rem;
+      margin-bottom: 2rem;
+    }
+    button {
+      width: 100%;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 4px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.15s;
+    }
+    button:hover {
+      opacity: 0.85;
+    }
+    .btn-primary {
+      background: #CC2020;
+      color: white;
+      margin-bottom: 1rem;
+    }
+    .loading {
+      color: #A8B8C4;
+      font-style: italic;
     }
   </style>
 </head>
 <body>
-  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+
+  <div class="login-container" id="login-container">
+    <img src="/assets/images/logo.png" alt="Filer Rural Fire District" class="logo">
+    <h1>CMS Admin</h1>
+    <p class="subtitle">Filer Rural Fire District</p>
+    <button class="btn-primary" onclick="startLogin()">Log in with GitHub</button>
+    <p class="loading">Only authorized users can access.</p>
+  </div>
+
+  <script>
+    function startLogin() {
+      // Open GitHub OAuth in popup
+      const width = 500;
+      const height = 600;
+      const left = (window.innerWidth - width) / 2;
+      const top = (window.innerHeight - height) / 2;
+
+      const popup = window.open(
+        '/api/auth',
+        'auth',
+        `width=${width},height=${height},left=${left},top=${top}`
+      );
+
+      // Wait for successful auth
+      const checkAuth = setInterval(() => {
+        try {
+          // Check if popup closed (auth completed)
+          if (popup.closed) {
+            clearInterval(checkAuth);
+            // Give a moment for localStorage to be updated, then reload
+            setTimeout(() => location.reload(), 100);
+          }
+        } catch (e) {
+          // Ignore errors from cross-origin popup access
+        }
+      }, 500);
+    }
+
+    // Check if already authenticated
+    document.addEventListener('DOMContentLoaded', () => {
+      // Check for Decap CMS auth token
+      const hasAuth = localStorage.getItem('netlify_auth') ||
+                      localStorage.getItem('netlify_auth:github:token');
+
+      if (hasAuth) {
+        // Already logged in, load the CMS
+        loadCMS();
+      }
+    });
+
+    function loadCMS() {
+      document.body.classList.add('cms-mode');
+      document.getElementById('login-container').style.display = 'none';
+
+      // Load Decap CMS
+      const script = document.createElement('script');
+      script.src = 'https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js';
+      document.body.appendChild(script);
+    }
+  </script>
+
 </body>
 </html>
