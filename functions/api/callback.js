@@ -45,9 +45,8 @@ export async function onRequest(context) {
     return errorPage('Failed to contact GitHub. Please try again.');
   }
 
-  // Return a page that sends the token back to the popup opener
-  const successPayload = JSON.stringify({ token, provider: 'github' });
-
+  // Store token in session storage and redirect back to admin
+  // Decap CMS will pick it up from there
   return new Response(
     `<!DOCTYPE html>
 <html>
@@ -55,32 +54,21 @@ export async function onRequest(context) {
   <meta charset="UTF-8">
 </head>
 <body>
-<p id="status">Authorizing...</p>
 <script>
 (function () {
-  const payload = ${successPayload};
-  document.getElementById('status').textContent = 'Token received: ' + payload.token.substring(0, 20) + '...';
+  const token = '${token}';
 
-  // Send to parent window - try both formats
-  if (window.opener) {
+  // Store in session storage
+  try {
+    sessionStorage.setItem('decap-cms-auth-token', token);
+  } catch (e) {
     try {
-      // Try sending as object (what Decap CMS v3 expects)
-      window.opener.postMessage({
-        type: 'authorization',
-        provider: 'github',
-        token: payload.token
-      }, '*');
-      document.getElementById('status').textContent = 'Auth sent to parent. Closing...';
-    } catch (e) {
-      document.getElementById('status').textContent = 'Error: ' + e.message;
-    }
-  } else {
-    document.getElementById('status').textContent = 'No parent window found';
+      localStorage.setItem('decap-cms-auth-token', token);
+    } catch (e2) {}
   }
 
-  setTimeout(function() {
-    window.close();
-  }, 2000);
+  // Redirect back to admin with token in hash
+  window.location.href = '/admin/#/login?token=' + encodeURIComponent(token);
 })();
 </script>
 </body>
