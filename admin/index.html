@@ -16,18 +16,25 @@
       justify-content: center;
       padding: 1rem;
     }
+    body.cms-loaded {
+      display: block;
+      background: white;
+      padding: 0;
+    }
     #login-page {
       background: white;
       border-radius: 8px;
       box-shadow: 0 10px 40px rgba(0,0,0,0.2);
       max-width: 500px;
       width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
       padding: 3rem 2rem;
       text-align: center;
-      display: none;
-      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
-    #login-page.show { display: block; }
     .logo {
       height: 60px;
       margin-bottom: 1.5rem;
@@ -221,7 +228,8 @@
     }
 
     function loadCMS() {
-      // Hide login page, show CMS
+      // Update body layout for CMS
+      document.body.classList.add('cms-loaded');
       document.getElementById('login-page').style.display = 'none';
 
       // Load Decap CMS script
