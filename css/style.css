@@ -444,6 +444,68 @@ footer ul a:hover { color: var(--white); text-decoration: none; }
   pointer-events: none;
 }
 
+/* ── Meeting Documents Accordion ───────────────────────── */
+.doc-accordion { margin-top: 1.5rem; }
+.doc-year {
+  border: 1px solid #e2e8f0;
+  border-radius: var(--radius);
+  margin-bottom: .75rem;
+  overflow: hidden;
+}
+.doc-year-btn {
+  width: 100%;
+  background: var(--navy);
+  color: var(--white);
+  border: none;
+  padding: 1rem 1.25rem;
+  text-align: left;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background .15s;
+}
+.doc-year-btn:hover { background: #253647; }
+.doc-year-btn .chevron { font-size: .75rem; transition: transform .25s; }
+.doc-year-btn[aria-expanded="true"] .chevron { transform: rotate(180deg); }
+.doc-year-body { display: none; padding: 1rem 1.25rem; background: #fff; }
+.doc-year-body.open { display: block; }
+.doc-grid {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: .5rem .75rem;
+  align-items: center;
+  font-size: .9rem;
+}
+.doc-grid-header {
+  font-weight: 700;
+  color: var(--navy);
+  padding-bottom: .4rem;
+  border-bottom: 2px solid var(--light);
+  margin-bottom: .25rem;
+}
+.doc-grid-row { display: contents; }
+.doc-grid-row span { padding: .35rem 0; border-bottom: 1px solid var(--light); color: var(--text); }
+.doc-link {
+  display: inline-block;
+  padding: .25rem .7rem;
+  border-radius: 4px;
+  font-size: .8rem;
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 1px solid var(--light);
+}
+.doc-link.agenda { background: var(--navy); color: #fff; }
+.doc-link.minutes { background: var(--red); color: #fff; }
+.doc-link.folder { background: var(--light); color: var(--navy); border: 1px solid #cbd5e1; }
+.doc-link:hover { opacity: .85; }
+.doc-missing { font-size: .75rem; color: #94a3b8; padding: .25rem 0; border-bottom: 1px solid var(--light); }
+@media (max-width: 768px) {
+  .doc-grid { grid-template-columns: 1fr auto auto; font-size: .82rem; }
+}
+
 /* ── Image + Text Split Layout ─────────────────────────── */
 .history-split {
   display: grid;
