@@ -48,9 +48,6 @@ export async function onRequest(context) {
   // Return a page that sends the token back to the popup opener
   const successPayload = JSON.stringify({ token, provider: 'github' });
 
-  // Return a page that sends the token back to the popup opener
-  const successPayload = JSON.stringify({ token, provider: 'github' });
-
   return new Response(
     `<!DOCTYPE html>
 <html>
