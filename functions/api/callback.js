@@ -48,6 +48,9 @@ export async function onRequest(context) {
   // Return a page that sends the token back to the popup opener
   const successPayload = JSON.stringify({ token, provider: 'github' });
 
+  // Return a page that sends the token back to the popup opener
+  const successPayload = JSON.stringify({ token, provider: 'github' });
+
   return new Response(
     `<!DOCTYPE html>
 <html>
@@ -55,37 +58,16 @@ export async function onRequest(context) {
   <meta charset="UTF-8">
 </head>
 <body>
-<p>Authorizing, please wait...</p>
+<p>Authorizing...</p>
 <script>
 (function () {
-  const payload = ${successPayload};
-
-  // Store the token in localStorage for the parent to detect
-  try {
-    localStorage.setItem('netlify_auth', JSON.stringify({
-      user: { login: 'github-user' },
-      token: payload.token
-    }));
-    localStorage.setItem('netlify_auth:github:token', payload.token);
-    console.log('Auth stored in localStorage');
-  } catch (e) {
-    console.error('Error storing auth:', e);
-  }
-
-  // Try to notify parent window
-  try {
-    if (window.opener) {
-      window.opener.postMessage({ type: 'auth-complete' }, '*');
-      console.log('Sent auth-complete message');
-    }
-  } catch (e) {
-    console.error('Error sending message:', e);
-  }
-
-  // Close popup
+  window.opener.postMessage(
+    'authorization:github:success:${successPayload}',
+    '*'
+  );
   setTimeout(function() {
     window.close();
-  }, 500);
+  }, 1000);
 })();
 </script>
 </body>
