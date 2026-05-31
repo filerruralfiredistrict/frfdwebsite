@@ -4,9 +4,6 @@ backend:
   branch: main
   base_url: https://frfdwebsite.pages.dev
   auth_endpoint: /api/auth
-  authorize:
-    - frfdadmin
-    - revcam
 
 # Media / image uploads go here
 media_folder: assets/images/uploads
