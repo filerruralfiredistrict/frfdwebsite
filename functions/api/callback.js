@@ -61,13 +61,15 @@ export async function onRequest(context) {
   const payload = ${successPayload};
   document.getElementById('status').textContent = 'Token received: ' + payload.token.substring(0, 20) + '...';
 
-  // Send to parent window
+  // Send to parent window - try both formats
   if (window.opener) {
     try {
-      window.opener.postMessage(
-        'authorization:github:success:' + JSON.stringify(payload),
-        '*'
-      );
+      // Try sending as object (what Decap CMS v3 expects)
+      window.opener.postMessage({
+        type: 'authorization',
+        provider: 'github',
+        token: payload.token
+      }, '*');
       document.getElementById('status').textContent = 'Auth sent to parent. Closing...';
     } catch (e) {
       document.getElementById('status').textContent = 'Error: ' + e.message;
