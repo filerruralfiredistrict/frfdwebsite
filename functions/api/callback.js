@@ -58,15 +58,20 @@ export async function onRequest(context) {
 <p>Authorizing, please wait...</p>
 <script>
 (function () {
-  // Send token directly to parent window, then close
-  window.opener.postMessage(
-    'authorization:github:success:${successPayload}',
-    window.location.origin
-  );
-  // Give parent a moment to receive message, then close popup
+  try {
+    // Send token to parent window for Decap CMS
+    window.opener.postMessage(
+      'authorization:github:success:${successPayload}',
+      '*'
+    );
+    console.log('Token sent to parent');
+  } catch (e) {
+    console.error('Error sending token:', e);
+  }
+  // Close popup after a moment
   setTimeout(function() {
     window.close();
-  }, 500);
+  }, 1000);
 })();
 </script>
 </body>
