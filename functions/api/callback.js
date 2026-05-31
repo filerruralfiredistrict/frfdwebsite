@@ -45,27 +45,29 @@ export async function onRequest(context) {
     return errorPage('Failed to contact GitHub. Please try again.');
   }
 
-  // Store token in localStorage and redirect back to admin
+  // Return a page that sends the token back to the Decap CMS popup opener
+  const successPayload = JSON.stringify({ token, provider: 'github' });
+
   return new Response(
     `<!DOCTYPE html>
 <html>
 <body>
+<p>Authorizing, please wait…</p>
 <script>
-(function() {
-  const token = '${token}';
-
-  // Store in multiple locations so Decap CMS can find it
-  try { localStorage.setItem('netlify_auth', JSON.stringify({ token, provider: 'github' })); } catch(e) {}
-  try { localStorage.setItem('decap.auth.user', JSON.stringify({ token, provider: 'github' })); } catch(e) {}
-  try { sessionStorage.setItem('decap-token', token); } catch(e) {}
-
-  // Redirect with token in hash
-  window.location.href = '/admin/#access_token=' + token + '&token_type=bearer';
+(function () {
+  function sendToken(e) {
+    window.opener.postMessage(
+      'authorization:github:success:${successPayload}',
+      e.origin
+    );
+  }
+  window.addEventListener('message', sendToken, false);
+  window.opener.postMessage('authorizing:github', '*');
 })();
 </script>
 </body>
 </html>`,
-    { headers: { 'Content-Type': 'text/html; charset=utf-8' } }
+    { headers: { 'Content-Type': 'text/html' } }
   );
 }
 
@@ -76,7 +78,7 @@ function errorPage(message) {
 <body>
 <h2>Authorization failed</h2>
 <p>${message}</p>
-<p>Close this window and try again.</p>
+<p>Close this window and try again, or contact your site administrator.</p>
 </body>
 </html>`,
     { status: 400, headers: { 'Content-Type': 'text/html' } }
