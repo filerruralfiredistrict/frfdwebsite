@@ -1,6 +1,6 @@
 {
   "active": true,
-  "message": "test alert",
-  "link": "www.testalertweb.com",
-  "link_text": "www.testalertoptionaltext.com"
+  "message": "Provide a Alert Message here",
+  "link": "",
+  "link_text": ""
 }
