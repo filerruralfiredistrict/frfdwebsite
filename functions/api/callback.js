@@ -58,13 +58,34 @@ export async function onRequest(context) {
 <p>Authorizing...</p>
 <script>
 (function () {
-  window.opener.postMessage(
-    'authorization:github:success:${successPayload}',
-    '*'
-  );
-  setTimeout(function() {
-    window.close();
-  }, 1000);
+  // Try postMessage first (for Decap CMS)
+  try {
+    if (window.opener) {
+      window.opener.postMessage(
+        'authorization:github:success:${successPayload}',
+        '*'
+      );
+      setTimeout(function() {
+        window.close();
+      }, 500);
+      // Message sent, stop here
+      return;
+    }
+  } catch (e) {
+    console.error('postMessage failed:', e);
+  }
+
+  // Fallback: store in localStorage and redirect
+  try {
+    localStorage.setItem('decap.auth.token', '${token}');
+    localStorage.setItem('decap.auth.user', JSON.stringify({
+      token: '${token}',
+      provider: 'github'
+    }));
+    window.location.href = '/admin/';
+  } catch (e) {
+    console.error('localStorage failed:', e);
+  }
 })();
 </script>
 </body>
