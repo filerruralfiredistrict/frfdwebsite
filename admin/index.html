@@ -25,6 +25,7 @@
       padding: 3rem 2rem;
       text-align: center;
       display: none;
+      margin: 0 auto;
     }
     #login-page.show { display: block; }
     .logo {
@@ -170,7 +171,25 @@
     }
 
     function login() {
-      window.location.href = '/api/auth';
+      // Open auth in a popup window
+      const width = 500;
+      const height = 600;
+      const left = window.innerWidth / 2 - width / 2;
+      const top = window.innerHeight / 2 - height / 2;
+      const popup = window.open(
+        '/api/auth',
+        'auth',
+        `width=${width},height=${height},left=${left},top=${top}`
+      );
+
+      // Listen for auth success message from popup
+      window.addEventListener('message', (e) => {
+        if (typeof e.data === 'string' && e.data.startsWith('authorization:github:success:')) {
+          popup.close();
+          // Reload to get updated auth state
+          location.reload();
+        }
+      });
     }
 
     function logout() {
