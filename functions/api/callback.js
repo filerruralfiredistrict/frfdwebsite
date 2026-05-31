@@ -45,29 +45,33 @@ export async function onRequest(context) {
     return errorPage('Failed to contact GitHub. Please try again.');
   }
 
-  // Return a page that sends the token back to the Decap CMS popup opener
+  // Return a page that sends the token back to the popup opener
   const successPayload = JSON.stringify({ token, provider: 'github' });
 
   return new Response(
     `<!DOCTYPE html>
 <html>
+<head>
+  <meta charset="UTF-8">
+</head>
 <body>
-<p>Authorizing, please wait…</p>
+<p>Authorizing, please wait...</p>
 <script>
 (function () {
-  function sendToken(e) {
-    window.opener.postMessage(
-      'authorization:github:success:${successPayload}',
-      e.origin
-    );
-  }
-  window.addEventListener('message', sendToken, false);
-  window.opener.postMessage('authorizing:github', '*');
+  // Send token directly to parent window, then close
+  window.opener.postMessage(
+    'authorization:github:success:${successPayload}',
+    window.location.origin
+  );
+  // Give parent a moment to receive message, then close popup
+  setTimeout(function() {
+    window.close();
+  }, 500);
 })();
 </script>
 </body>
 </html>`,
-    { headers: { 'Content-Type': 'text/html' } }
+    { headers: { 'Content-Type': 'text/html; charset=utf-8' } }
   );
 }
 
