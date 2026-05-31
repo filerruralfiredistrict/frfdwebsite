@@ -1,13 +1,39 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-  // Mobile nav toggle
+  // Mobile nav drawer
   const hamburger = document.querySelector('.hamburger');
   const nav = document.querySelector('header nav');
   if (hamburger && nav) {
+    const openNav = () => {
+      nav.classList.add('open');
+      hamburger.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+    };
+    const closeNav = () => {
+      nav.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    };
+
     hamburger.addEventListener('click', () => {
-      nav.classList.toggle('open');
-      hamburger.setAttribute('aria-expanded', nav.classList.contains('open'));
+      nav.classList.contains('open') ? closeNav() : openNav();
     });
+
+    // Close when clicking the overlay (left of drawer)
+    nav.addEventListener('click', e => {
+      if (e.target === nav) closeNav();
+    });
+
+    // Close on Escape key
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeNav();
+    });
+
+    // Close when a nav link is tapped
+    nav.querySelectorAll('a:not(.nav-dropdown > a)').forEach(a => {
+      a.addEventListener('click', closeNav);
+    });
+
     // Mobile dropdown toggles
     document.querySelectorAll('.nav-dropdown > a').forEach(link => {
       link.addEventListener('click', e => {
