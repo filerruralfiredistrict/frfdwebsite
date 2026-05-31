@@ -78,3 +78,21 @@ collections:
             widget: string
             required: false
             hint: "e.g. Learn more"
+
+      - label: Meeting Year Folders
+        name: meeting_years
+        file: data/meeting-years.json
+        fields:
+          - label: Years
+            name: items
+            widget: list
+            summary: "{{fields.year}} — {{fields.url}}"
+            fields:
+              - label: Year
+                name: year
+                widget: string
+                hint: "e.g. 2027"
+              - label: Google Drive Folder URL
+                name: url
+                widget: string
+                hint: "Shareable Google Drive folder link for this year's agendas"

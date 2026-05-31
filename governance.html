@@ -67,11 +67,8 @@
 
         <h3 style="margin-top:2rem;">Meeting Agendas</h3>
         <p>Agendas are posted to Google Drive at least 2 days before each meeting. Click a year to view and download agendas — no Google account required.</p>
-        <ul class="doc-year-links">
-          <li><a href="https://drive.google.com/drive/folders/122EHIm6ErghRZm-Q9z9HRWwcEXza7yLV?usp=sharing" target="_blank" rel="noopener">&#128193; 2026 Meeting Agendas</a></li>
-          <li><a href="https://drive.google.com/drive/folders/1RTyJirc-twlPL05TYE9zjd-Eux0PhqnO?usp=sharing" target="_blank" rel="noopener">&#128193; 2025 Meeting Agendas</a></li>
-          <li><a href="https://drive.google.com/drive/folders/1OAlqxRkSJSubfT8Egf9uWGKg1nf6s_K2?usp=sharing" target="_blank" rel="noopener">&#128193; 2024 Meeting Agendas</a></li>
-          <li><a href="https://drive.google.com/drive/folders/1aaZFcTeBdyktoZs4rFr3CvEJfCnC4Pq0?usp=sharing" target="_blank" rel="noopener">&#128193; 2023 Meeting Agendas</a></li>
+        <ul class="doc-year-links" id="meeting-years-list">
+          <li style="color:#94a3b8;font-size:.9rem;">Loading…</li>
         </ul>
 
         <h3 style="margin-top:2rem;">Public Comment</h3>
@@ -134,5 +131,20 @@
 
   <script src="/js/components.js"></script>
   <script src="/js/main.js"></script>
+  <script>
+    fetch('/data/meeting-years.json')
+      .then(r => r.json())
+      .then(data => {
+        const years = data.items || data;
+        const list = document.getElementById('meeting-years-list');
+        list.innerHTML = years.map(y => `
+          <li><a href="${y.url}" target="_blank" rel="noopener">&#128193; ${y.year} Meeting Agendas</a></li>
+        `).join('');
+      })
+      .catch(() => {
+        document.getElementById('meeting-years-list').innerHTML =
+          '<li>Unable to load meeting documents. Please call <a href="tel:+12083264111">(208) 326-4111</a>.</li>';
+      });
+  </script>
 </body>
 </html>
