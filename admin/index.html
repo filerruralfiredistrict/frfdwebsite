@@ -30,8 +30,8 @@
       background: white;
       border-radius: 8px;
       box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+      width: 90vw;
       max-width: 500px;
-      width: 100%;
       padding: 3rem 2rem;
       text-align: center;
       flex-shrink: 0;
@@ -106,10 +106,6 @@
       font-style: italic;
       padding: 2rem 1rem;
     }
-    #cms-container {
-      width: 100%;
-      height: 100vh;
-    }
   </style>
 </head>
 <body>
@@ -124,9 +120,6 @@
       <div class="loading">Checking login status...</div>
     </div>
   </div>
-
-  <!-- CMS Container (shown when logged in) -->
-  <div id="cms-container"></div>
 
   <script>
     function getAuthUser() {
