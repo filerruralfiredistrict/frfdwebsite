@@ -15,13 +15,14 @@ This document provides a comprehensive technical breakdown of the entire codebas
 3. [Architecture & Design](#architecture--design)
 4. [Complete Directory Structure](#complete-directory-structure)
 5. [How Each System Works](#how-each-system-works)
-6. [Data Files & Configuration](#data-files--configuration)
-7. [JavaScript Modules](#javascript-modules)
-8. [Common Tasks & Workflows](#common-tasks--workflows)
-9. [Deployment & Hosting](#deployment--hosting)
-10. [Troubleshooting Guide](#troubleshooting-guide)
-11. [Important Patterns & Conventions](#important-patterns--conventions)
-12. [Do's and Don'ts](#dos-and-donts)
+6. [SEO & User Experience](#seo--user-experience)
+7. [Data Files & Configuration](#data-files--configuration)
+8. [JavaScript Modules](#javascript-modules)
+9. [Common Tasks & Workflows](#common-tasks--workflows)
+10. [Deployment & Hosting](#deployment--hosting)
+11. [Troubleshooting Guide](#troubleshooting-guide)
+12. [Important Patterns & Conventions](#important-patterns--conventions)
+13. [Do's and Don'ts](#dos-and-donts)
 
 ---
 
@@ -114,6 +115,8 @@ frfdwebsite/
 ├── privacy.html                       # Privacy policy
 ├── accessibility.html                 # WCAG 2.1 AA accessibility statement
 ├── transparency.html                  # Financial transparency, public records
+├── 404.html                           # Custom error page (replaces Cloudflare default)
+├── sitemap.xml                        # XML sitemap for search engines
 │
 ├── _redirects                         # Cloudflare Pages redirect rules
 ├── wrangler.jsonc                     # Cloudflare Workers config (auto-generated)
@@ -473,6 +476,100 @@ nav a.active { background: rgba(255,255,255,.12); }
 - Everything else is JSON
 - CMS reads/writes directly to the GitHub repo
 - Changes committed automatically (no manual git needed)
+
+---
+
+## SEO & User Experience
+
+### Custom 404 Page (404.html)
+
+Provides a friendly error page when users hit a broken link instead of the default Cloudflare error page.
+
+**What it does**:
+- Matches site design with header/footer
+- Shows a large "404" heading
+- Explains the page wasn't found
+- Offers navigation buttons to Home, Updates, Contact
+
+**How it works**:
+- Cloudflare Pages automatically serves 404.html for 404 errors
+- No configuration needed — just having the file enables it
+- Falls back to default Cloudflare error if 404.html is missing
+
+**To Update**:
+- Edit 404.html just like any other page
+- Change the message, buttons, or styling as needed
+- Commit and push to redeploy
+
+---
+
+### Open Graph Meta Tags
+
+Improves social media sharing. When pages are shared on Facebook, Twitter, LinkedIn, etc., they display with a preview image, title, and description.
+
+**Which pages have them**:
+- index.html
+- news.html
+- services.html
+- volunteer.html
+
+**What they look like**:
+```html
+<meta property="og:title" content="Updates – Filer Rural Fire District">
+<meta property="og:description" content="Latest news and updates...">
+<meta property="og:type" content="website">
+<meta property="og:image" content="/assets/images/logo.png">
+<meta property="og:url" content="https://frfdwebsite.pages.dev/news.html">
+```
+
+**To Add to More Pages**:
+1. Copy the 5 lines above into the `<head>` of any page
+2. Update the values to match that page's content
+3. Use absolute URLs for og:url and og:image
+4. When the real domain is connected, update URLs from frfdwebsite.pages.dev to filerfireandrescue.org
+
+**Note**: When real domain goes live, update all og:url values to use the real domain.
+
+---
+
+### Sitemap (sitemap.xml)
+
+XML file listing all pages for search engines. Helps with SEO and crawl efficiency.
+
+**Format**:
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://frfdwebsite.pages.dev/</loc>
+    <lastmod>2026-05-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <!-- More URLs... -->
+</urlset>
+```
+
+**Fields**:
+- `loc` — Full URL to the page
+- `lastmod` — Last modified date (YYYY-MM-DD format)
+- `changefreq` — How often it changes (always, hourly, daily, weekly, monthly, yearly, never)
+- `priority` — Relative priority (0.0–1.0), where 1.0 is most important
+
+**Current priorities**:
+- 1.0 — Home page (most important)
+- 0.9 — Services, News, Volunteer (high priority)
+- 0.8 — Governance, History, Contact
+- 0.7 — Transparency
+- 0.5 — Privacy, Accessibility (least important)
+
+**To Update**:
+- Add/remove URLs as pages are added/deleted
+- Update `lastmod` dates when pages change significantly
+- Adjust priorities if important pages change
+- Google automatically finds and reads sitemap.xml
+
+**Note**: Cloudflare automatically serves sitemap.xml — no special config needed.
 
 ---
 

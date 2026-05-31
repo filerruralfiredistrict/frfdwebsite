@@ -73,6 +73,8 @@ A static website for **Filer Rural Fire District, Station 26**, located in Filer
 ├── privacy.html            # Privacy policy
 ├── accessibility.html      # WCAG 2.1 AA accessibility statement
 ├── transparency.html       # Financial transparency / public records
+├── 404.html                # Custom error page (friendly 404, replaces Cloudflare default)
+├── sitemap.xml             # XML sitemap for search engines
 ├── _redirects              # Cloudflare Pages redirect rules
 ├── wrangler.jsonc          # Cloudflare Workers config (auto-generated)
 │
@@ -218,6 +220,16 @@ All styles are in `css/style.css`. Key patterns:
 - **Page hero:** `.page-hero` — dark navy banner used on all inner pages
 - **Buttons:** `.btn.btn-primary` (red) and `.btn.btn-outline` (white outline on dark bg)
 - **Responsive breakpoint:** 768px — hamburger menu activates, layouts stack
+
+---
+
+## SEO & Social Media Sharing
+
+**Open Graph Meta Tags**: Key pages (index, news, services, volunteer) include Open Graph meta tags in the `<head>`. When these pages are shared on social media, they display with a proper title, description, and logo image instead of a blank preview.
+
+**Sitemap**: `sitemap.xml` lists all pages with priorities and change frequency. Helps search engines crawl and index the site efficiently. Update priorities and last-modified dates when making significant changes.
+
+**Custom 404 Page**: `404.html` provides a friendly error page with navigation links instead of the default Cloudflare error page. Helps users find what they're looking for when they hit a broken link.
 
 ---
 
