@@ -2,6 +2,7 @@ backend:
   name: github
   repo: frfdadmin/frfdwebsite
   branch: main
+  base_url: https://frfdwebsite.pages.dev
   auth_endpoint: /api/auth
 
 # Media / image uploads go here
