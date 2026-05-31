@@ -506,6 +506,24 @@ footer ul a:hover { color: var(--white); text-decoration: none; }
   .doc-grid { grid-template-columns: 1fr auto auto; font-size: .82rem; }
 }
 
+/* ── Meeting Year Links ─────────────────────────────────── */
+.doc-year-links { list-style: none; padding: 0; margin: 1rem 0; }
+.doc-year-links li { margin-bottom: .6rem; }
+.doc-year-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  padding: .6rem 1.25rem;
+  background: var(--light);
+  border: 1px solid #e2e8f0;
+  border-radius: var(--radius);
+  color: var(--navy);
+  font-weight: 600;
+  text-decoration: none;
+  transition: background .15s, border-color .15s;
+}
+.doc-year-links a:hover { background: #e2e8f0; border-color: #cbd5e1; }
+
 /* ── Image + Text Split Layout ─────────────────────────── */
 .history-split {
   display: grid;
