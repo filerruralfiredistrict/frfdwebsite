@@ -463,6 +463,7 @@ nav a.active { background: rgba(255,255,255,.12); }
 - In `admin/config.yml`, the `authorize:` list restricts who can log in
 - Currently: frfdadmin, revcam
 - Add usernames to allow more editors
+- **Critical:** The `repo:` field must be set to `frfdadmin/frfdwebsite` — if it points to a different repository, OAuth will complete but authorization will fail even if the user is in the authorize list
 
 **Collections** (what editors can edit):
 - **News & Updates** — Create/edit/delete posts in `_posts/`
@@ -1119,7 +1120,12 @@ If something breaks:
    - Is your GitHub username in `admin/config.yml` under `authorize:`?
    - If not, you'll get "Authorization failed"
 
-5. **Clear cookies/cache**:
+5. **Verify the repo field**:
+   - In `admin/config.yml`, check that `repo: frfdadmin/frfdwebsite`
+   - If it points to a different repo, OAuth will complete but authorization will fail
+   - This is a common issue when testing or migrating repos
+
+6. **Clear cookies/cache**:
    - Sometimes old tokens linger
    - Clear site cookies and try again
 

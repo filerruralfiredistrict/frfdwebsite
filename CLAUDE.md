@@ -167,11 +167,26 @@ These must be set for the OAuth flow to work. Without them, login will fail.
 
 **GitHub OAuth App callback URL must match.** Currently: `https://frfdwebsite.pages.dev/api/callback`. When the real domain is connected, update the OAuth App's callback URL to `https://REALDOMAIN.org/api/callback`.
 
+### How the OAuth Flow Works
+
+1. User visits `/admin` and clicks "Login with GitHub"
+2. Decap CMS redirects to `/api/auth` (GitHub OAuth initiation)
+3. `/api/auth` redirects to GitHub's OAuth authorization page
+4. User authorizes the app on GitHub
+5. GitHub redirects back to `/api/callback` with an authorization code
+6. `/api/callback` exchanges the code for a token via GitHub API
+7. Callback returns an HTML page that uses `postMessage` to send the token back to the parent Decap CMS window
+8. Decap CMS receives the token and completes the login handshake
+
+**Critical:** The callback window communicates with the parent via `postMessage` using the format `'authorization:github:success:{token, provider}'`. This is the standard Decap CMS v3 OAuth pattern.
+
 ### Managing CMS Access
 
 CMS access is restricted to authorized GitHub users in `admin/config.yml`. Currently authorized:
 - `frfdadmin`
 - `revcam`
+
+**Important:** The config must point to the correct repo (`repo: frfdadmin/frfdwebsite`). If it points to a wrong repo, the OAuth flow will authenticate but authorization will fail, even if the user is in the authorize list.
 
 **To add a new user:**
 1. Go to https://github.com/frfdadmin/frfdwebsite/blob/main/admin/config.yml
@@ -235,7 +250,7 @@ All styles are in `css/style.css`. Key patterns:
 
 ---
 
-## Pending Items (as of May 2026)
+## Pending Items (as of May 31, 2026)
 
 ### Waiting on domain / go-live:
 - [ ] **Real domain** — connect filerfireandrescue.org (Namecheap) to Cloudflare Pages, update GitHub OAuth App callback URL from `frfdwebsite.pages.dev/api/callback` to real domain
