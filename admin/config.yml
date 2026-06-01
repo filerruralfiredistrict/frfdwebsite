@@ -15,20 +15,6 @@ public_folder: /assets/images/uploads
 # ── Collections ────────────────────────────────────────────
 collections:
 
-  # Staff & Board Photos (separate media gallery)
-  - name: staff_photos_gallery
-    label: Staff Photos
-    folder: assets/images/staff
-    media_folder: assets/images/staff
-    public_folder: /assets/images/staff
-    create: false
-    delete: true
-    fields:
-      - label: Image
-        name: image
-        widget: image
-        hint: "Upload or manage staff and board member photos here"
-
   # News & Updates posts
   - name: posts
     label: News & Updates
