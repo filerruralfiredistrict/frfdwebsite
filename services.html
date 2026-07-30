@@ -77,13 +77,25 @@
   <!-- Photo Strip -->
   <section class="section bg-light" style="padding:2rem 0;">
     <div class="container">
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;">
-        <img src="/assets/images/uploads/new-engine-2025.jpg" alt="Filer Fire District Engine" style="width:100%;height:220px;object-fit:contain;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,.12);">
-        <img src="/assets/images/uploads/ems-qru.jpg" alt="Filer Fire and Rescue Quick Response Unit" style="width:100%;height:220px;object-fit:contain;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,.12);">
-        <img src="/assets/images/site/mobile-safety-house.png" alt="Filer Fire Mobile Safety House" style="width:100%;height:220px;object-fit:contain;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,.12);">
+      <div class="services-photo-grid">
+        <button class="lightbox-trigger" aria-label="View full image: Filer Fire District Engine">
+          <img src="/assets/images/uploads/new-engine-2025.jpg" alt="Filer Fire District Engine">
+        </button>
+        <button class="lightbox-trigger" aria-label="View full image: Quick Response Unit">
+          <img src="/assets/images/uploads/ems-qru.jpg" alt="Filer Fire and Rescue Quick Response Unit">
+        </button>
+        <button class="lightbox-trigger" aria-label="View full image: Mobile Safety House">
+          <img src="/assets/images/site/mobile-safety-house.png" alt="Filer Fire Mobile Safety House">
+        </button>
       </div>
     </div>
   </section>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
+    <button class="lightbox-close" id="lightbox-close" aria-label="Close image viewer">&times;</button>
+    <img id="lightbox-img" src="" alt="">
+  </div>
 
   <!-- Burn Permits -->
   <section class="section bg-light" id="burn-permits">
