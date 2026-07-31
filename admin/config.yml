@@ -1,11 +1,11 @@
 backend:
   name: github
-  repo: frfdadmin/frfdwebsite
+  repo: filerruralfiredistrict/frfdwebsite
   branch: main
   base_url: https://frfdwebsite.pages.dev
   auth_endpoint: /api/auth
   authorize:
-    - frfdadmin
+    - filerruralfiredistrict
     - revcam
 
 # Media / image uploads go here

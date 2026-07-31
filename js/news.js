@@ -5,7 +5,7 @@
  *
  * If the repo moves to a new account, update REPO below.
  */
-const REPO = 'frfdadmin/frfdwebsite';
+const REPO = 'filerruralfiredistrict/frfdwebsite';
 const BRANCH = 'main';
 const API_BASE = `https://api.github.com/repos/${REPO}/contents/_posts?ref=${BRANCH}`;
 const RAW_BASE = `https://raw.githubusercontent.com/${REPO}/${BRANCH}/_posts/`;
