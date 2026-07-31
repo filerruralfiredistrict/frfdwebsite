@@ -264,7 +264,16 @@ All styles are in `css/style.css`. Key patterns:
 - [x] **Web3Forms key** — live in contact.html and volunteer.html (key: cf2f5e66-3b77-4ffa-83be-226465fe4572)
 - [x] **GitHub repo transferred** — `frfdadmin/frfdwebsite` → `filerruralfiredistrict/frfdwebsite`
 - [x] **Cloudflare Pages** — set up under `filerruralfiredistrict@gmail.com`
+- [x] **filerfd.org** — live and active as primary domain
 - [x] **Services page photo strip** — landscape grid with lightbox image viewer
+- [x] **Facebook link** — icon in header nav + link in footer (page: facebook.com/people/Filer-Rural-Fire/61581663036692)
+- [x] **Updates page** — Facebook CTA banner + subtle admin link for district staff
+- [x] **Staff placeholder icon** — changed to firefighter emoji (🧑‍🚒)
+
+### Pending / future:
+- [ ] **Facebook Page Plugin embed** — requires Facebook Developer App with filerfd.org as allowed domain; currently replaced with a CTA button linking to their page
+- [ ] **Google Drive folders** — may need to transfer ownership to district Google account; URLs are CMS-managed (update via /admin → Site Settings → Meeting Year Folders, no code change needed)
+- [ ] **BeepFix GitHub account** — when created, add as collaborator on `filerruralfiredistrict/frfdwebsite` and add to `authorize:` list in admin/config.yml
 
 ### Waiting on district:
 - [ ] **Assistant Chief name** — data/staff.json has empty name field, update via /admin when confirmed
