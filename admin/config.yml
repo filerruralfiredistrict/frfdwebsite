@@ -2,7 +2,7 @@ backend:
   name: github
   repo: filerruralfiredistrict/frfdwebsite
   branch: main
-  base_url: https://frfdwebsite.pages.dev
+  base_url: https://filerfd.org
   auth_endpoint: /api/auth
   authorize:
     - filerruralfiredistrict
