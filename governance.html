@@ -92,7 +92,7 @@
     function staffCard(person, isBoard) {
       const avatar = person.photo
         ? `<img class="staff-photo" src="${person.photo}" alt="${person.name}">`
-        : `<div class="staff-avatar">${isBoard ? '👤' : '🪖'}</div>`;
+        : `<div class="staff-avatar">${isBoard ? '👤' : '🧑‍🚒'}</div>`;
       const displayName = person.name || person.role;
       const phone = person.phone
         ? `<div><a href="tel:+1${person.phone.replace(/\D/g,'')}">${person.phone}</a></div>` : '';
