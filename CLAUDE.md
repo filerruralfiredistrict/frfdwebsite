@@ -20,14 +20,16 @@ A static website for **Filer Rural Fire District, Station 26**, located in Filer
 
 | Service | Account | Purpose |
 |---|---|---|
-| GitHub | frfdadmin/frfdwebsite | Source code repository |
-| Cloudflare Pages | frfdadmin account | Hosting & deployment (auto-deploys on push to main) |
-| Web3Forms | frfdadmin account | Contact & volunteer form submissions |
+| GitHub | filerruralfiredistrict/frfdwebsite | Source code repository |
+| Cloudflare Pages | filerruralfiredistrict@gmail.com | Hosting & deployment (auto-deploys on push to main) |
+| Web3Forms | filerruralfiredistrict@gmail.com | Contact & volunteer form submissions |
 | Decap CMS | `/admin` on live site | Browser-based news editor for district staff |
 
-**Dev repo (Andrew Cameron):** revcam/frfd — kept as backup/working copy  
+**Dev access (Andrew Cameron / BeepFix):** `revcam` added as collaborator on `filerruralfiredistrict/frfdwebsite`  
+**Note:** A BeepFix GitHub account may replace `revcam` as the official developer account in future — add as collaborator + update `admin/config.yml` authorize list when ready.  
 **Staging URL:** https://frfdwebsite.pages.dev (live and working)  
-**Real domain:** filerfireandrescue.org (registered on Namecheap — pending connection to Cloudflare Pages)
+**Primary domain:** filerfd.org (DNS transferred to Cloudflare — pending propagation)  
+**Secondary domain:** filerfireandrescue.org (pending transfer to Namecheap — connect to Cloudflare Pages once available)
 
 ---
 
@@ -134,6 +136,8 @@ The home page uses `<div class="news-grid" data-limit="3">` to show only the 3 l
 
 **If the repo is ever moved:** Update `const REPO` at the top of `js/news.js` and `repo:` in `admin/config.yml`.
 
+**Current repo:** `filerruralfiredistrict/frfdwebsite` (transferred from `frfdadmin` on 2026-07-31)
+
 ---
 
 ## How the Alert Banner Works
@@ -165,7 +169,7 @@ Set `"active": false` to hide it. Managed via Decap CMS → Site Settings → Al
 
 These must be set for the OAuth flow to work. Without them, login will fail.
 
-**GitHub OAuth App callback URL must match.** Currently: `https://frfdwebsite.pages.dev/api/callback`. When the real domain is connected, update the OAuth App's callback URL to `https://REALDOMAIN.org/api/callback`.
+**GitHub OAuth App callback URL must match.** Currently set to `https://frfdwebsite.pages.dev/api/callback` under the `filerruralfiredistrict` GitHub account. When `filerfd.org` is live, update to `https://filerfd.org/api/callback`.
 
 ### How the OAuth Flow Works
 
@@ -183,7 +187,7 @@ These must be set for the OAuth flow to work. Without them, login will fail.
 ### Managing CMS Access
 
 CMS access is restricted to authorized GitHub users in `admin/config.yml`. Currently authorized:
-- `frfdadmin`
+- `filerruralfiredistrict`
 - `revcam`
 
 **Important:** The config must point to the correct repo (`repo: frfdadmin/frfdwebsite`). If it points to a wrong repo, the OAuth flow will authenticate but authorization will fail, even if the user is in the authorize list.
@@ -219,9 +223,7 @@ Every page has `<div id="site-header"></div>` and `<div id="site-footer"></div>`
 
 Both forms use **Web3Forms** (`https://api.web3forms.com/submit`).
 
-Replace `YOUR_WEB3FORMS_ACCESS_KEY` in these files with the real key from the frfdadmin Web3Forms account:
-- `contact.html` (line ~40)
-- `volunteer.html` (line ~40)
+Web3Forms access key is live — registered to `filerruralfiredistrict@gmail.com`. Both forms are wired up and active.
 
 Form submissions are sent to whatever email was registered with Web3Forms.
 
@@ -250,12 +252,19 @@ All styles are in `css/style.css`. Key patterns:
 
 ---
 
-## Pending Items (as of May 31, 2026)
+## Pending Items (as of July 31, 2026)
 
-### Waiting on domain / go-live:
-- [ ] **Real domain** — connect filerfireandrescue.org (Namecheap) to Cloudflare Pages, update GitHub OAuth App callback URL from `frfdwebsite.pages.dev/api/callback` to real domain
-- [ ] **Web3Forms access key** — replace `YOUR_WEB3FORMS_ACCESS_KEY` in contact.html and volunteer.html (holding until real domain is live)
-- [ ] **base_url in admin/config.yml** — update from `https://frfdwebsite.pages.dev` to real domain after go-live
+### Waiting on domain:
+- [ ] **filerfd.org DNS propagation** — nameservers pointed to Cloudflare, waiting on propagation (usually a few hours)
+- [ ] **Update base_url in admin/config.yml** — change from `https://frfdwebsite.pages.dev` to `https://filerfd.org` once live
+- [ ] **Update GitHub OAuth App callback URL** — change to `https://filerfd.org/api/callback` under `filerruralfiredistrict` GitHub account
+- [ ] **filerfireandrescue.org** — pending transfer to Namecheap; connect to Cloudflare Pages as an alias domain once available
+
+### ✅ Completed July 31, 2026:
+- [x] **Web3Forms key** — live in contact.html and volunteer.html (key: cf2f5e66-3b77-4ffa-83be-226465fe4572)
+- [x] **GitHub repo transferred** — `frfdadmin/frfdwebsite` → `filerruralfiredistrict/frfdwebsite`
+- [x] **Cloudflare Pages** — set up under `filerruralfiredistrict@gmail.com`
+- [x] **Services page photo strip** — landscape grid with lightbox image viewer
 
 ### Waiting on district:
 - [ ] **Assistant Chief name** — data/staff.json has empty name field, update via /admin when confirmed
