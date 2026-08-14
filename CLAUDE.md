@@ -340,6 +340,29 @@ Download script for old Streamline docs: `~/frfdwebsite/download-docs.sh` → sa
 
 ---
 
+## Accessibility (WCAG 2.1 AA — Required)
+
+As a special district government, this site falls under **ADA Title II** (compliance deadline April 26, 2028). All new code must target WCAG 2.1 Level AA by default.
+
+**Standing rules:**
+- Decorative icons/emoji must have `aria-hidden="true"` on their wrapper — the adjacent heading conveys meaning
+- Every `<input>`, `<select>`, and `<textarea>` must have a linked `<label for="id">` or `aria-label`
+- Form success/error messages must have `role="alert" aria-live="polite"` so screen readers announce them
+- Every `<iframe>` must have a descriptive `title` attribute
+- Use real `<button>` and `<a>` tags for all interactive elements — no `<div>`/`<span>` click handlers
+- All images must have meaningful `alt` text (or `alt=""` if purely decorative)
+- Heading hierarchy must not skip levels (h1 → h2 → h3, never h1 → h3)
+- Maintain color contrast: 4.5:1 for normal text, 3:1 for large text
+
+**Audit completed July 31, 2026:**
+- ✅ Form labels properly linked (contact.html, volunteer.html)
+- ✅ Maps iframe has title attribute
+- ✅ Heading hierarchy clean across all pages
+- ✅ Emoji card icons marked aria-hidden (index.html, services.html)
+- ✅ Form success messages have role="alert" aria-live="polite"
+
+---
+
 ## Do Not Do
 
 - Do not add build tools, npm, or any package manager
@@ -349,3 +372,5 @@ Download script for old Streamline docs: `~/frfdwebsite/download-docs.sh` → sa
 - Do not change `const REPO` in news.js without also updating `repo:` in admin/config.yml
 - Do not use `Station 20` — it is Station 26
 - Do not use `100 S HWY 30` — the correct address is `100 US-30, Filer, ID 83328`
+- Do not add interactive elements using `<div>`/`<span>` — always use `<button>` or `<a>`
+- Do not add emoji icons without `aria-hidden="true"` on the wrapper
