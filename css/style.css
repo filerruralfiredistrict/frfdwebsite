@@ -3,7 +3,8 @@
   --navy:   #1D2B3A;
   --red:    #CC2020;
   --white:  #FFFFFF;
-  --gray:   #A8B8C4;
+  --gray:      #A8B8C4;
+  --gray-text: #4b6070;
   --light:  #F4F6F8;
   --dark:   #111820;
   --text:   #2C3E50;
@@ -182,7 +183,7 @@ nav a:hover, nav a.active { background: rgba(255,255,255,.12); text-decoration: 
 .card:hover { transform: translateY(-3px); box-shadow: 0 6px 16px rgba(0,0,0,.1); }
 .card-icon { font-size: 2rem; margin-bottom: .75rem; }
 .card h3 { font-size: 1.1rem; color: var(--navy); margin-bottom: .5rem; }
-.card p { font-size: .9rem; color: #64748b; }
+.card p { font-size: .9rem; color: var(--gray-text); }
 
 /* ── News Feed ─────────────────────────────────────────── */
 .news-grid {
@@ -202,9 +203,9 @@ nav a:hover, nav a.active { background: rgba(255,255,255,.12); text-decoration: 
 .news-card:hover { transform: translateY(-3px); }
 .news-card-img { width: 100%; height: 180px; object-fit: cover; background: var(--light); }
 .news-card-body { padding: 1.25rem; }
-.news-card-date { font-size: .75rem; color: var(--gray); margin-bottom: .35rem; }
+.news-card-date { font-size: .75rem; color: var(--gray-text); margin-bottom: .35rem; }
 .news-card-title { font-size: 1rem; font-weight: 700; color: var(--navy); margin-bottom: .5rem; }
-.news-card-excerpt { font-size: .875rem; color: #64748b; }
+.news-card-excerpt { font-size: .875rem; color: var(--gray-text); }
 .news-card-body a { display: inline-block; margin-top: .75rem; font-size: .875rem; font-weight: 600; color: var(--red); }
 
 /* ── Section alt bg ────────────────────────────────────── */
@@ -269,7 +270,7 @@ nav a:hover, nav a.active { background: rgba(255,255,255,.12); text-decoration: 
   border: 3px solid var(--red);
 }
 .staff-name { font-weight: 700; color: var(--navy); font-size: .95rem; }
-.staff-role { font-size: .8rem; color: #64748b; margin-top: .2rem; }
+.staff-role { font-size: .8rem; color: var(--gray-text); margin-top: .2rem; }
 
 /* ── FAQ Accordion ─────────────────────────────────────── */
 .faq-item { border-bottom: 1px solid #e2e8f0; }
@@ -290,7 +291,7 @@ nav a:hover, nav a.active { background: rgba(255,255,255,.12); text-decoration: 
 }
 .faq-question::after { content: '+'; font-size: 1.25rem; color: var(--red); flex-shrink: 0; }
 .faq-question[aria-expanded="true"]::after { content: '−'; }
-.faq-answer { display: none; padding: 0 0 1rem; color: #64748b; font-size: .95rem; }
+.faq-answer { display: none; padding: 0 0 1rem; color: var(--gray-text); font-size: .95rem; }
 .faq-answer.open { display: block; }
 
 /* ── Contact Form ──────────────────────────────────────── */
@@ -339,7 +340,7 @@ nav a:hover, nav a.active { background: rgba(255,255,255,.12); text-decoration: 
   flex-shrink: 0;
 }
 .contact-info-icon svg { width: 18px; height: 18px; fill: var(--white); }
-.contact-info-label { font-size: .8rem; color: var(--gray); }
+.contact-info-label { font-size: .8rem; color: var(--gray-text); }
 .contact-info-value { font-weight: 600; color: var(--navy); }
 
 .map-embed {
@@ -510,7 +511,7 @@ footer ul a:hover { color: var(--white); text-decoration: none; }
 .doc-link.minutes { background: var(--red); color: #fff; }
 .doc-link.folder { background: var(--light); color: var(--navy); border: 1px solid #cbd5e1; }
 .doc-link:hover { opacity: .85; }
-.doc-missing { font-size: .75rem; color: #94a3b8; padding: .25rem 0; border-bottom: 1px solid var(--light); }
+.doc-missing { font-size: .75rem; color: var(--gray-text); padding: .25rem 0; border-bottom: 1px solid var(--light); }
 @media (max-width: 768px) {
   .doc-grid { grid-template-columns: 1fr auto auto; font-size: .82rem; }
 }
