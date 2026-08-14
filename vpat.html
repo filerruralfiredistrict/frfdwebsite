@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Voluntary Product Accessibility Template (VPAT) for filerfd.org — WCAG 2.1 Level AA conformance report.">
+  <title>Accessibility Conformance Report – Filer Rural Fire District</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="icon" href="/assets/images/logo.png" type="image/png">
+  <style>
+    .vpat-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: .92rem; }
+    .vpat-table th, .vpat-table td { border: 1px solid var(--light); padding: .6rem .8rem; vertical-align: top; text-align: left; }
+    .vpat-table th { background: var(--navy); color: #fff; font-weight: 600; }
+    .vpat-table tr:nth-child(even) td { background: rgba(0,0,0,.03); }
+    .badge { display: inline-block; padding: .15rem .5rem; border-radius: 4px; font-size: .8rem; font-weight: 600; white-space: nowrap; }
+    .badge-supports { background: #dcfce7; color: #166534; }
+    .badge-partial { background: #fef9c3; color: #854d0e; }
+    .badge-na { background: #f1f5f9; color: #64748b; }
+    .section-heading { margin-top: 2.5rem; padding-bottom: .4rem; border-bottom: 2px solid var(--red); }
+    .vpat-meta { background: var(--light); border-radius: 8px; padding: 1.25rem 1.5rem; margin-bottom: 2rem; }
+    .vpat-meta dl { display: grid; grid-template-columns: max-content 1fr; gap: .3rem 1rem; margin: 0; }
+    .vpat-meta dt { font-weight: 600; color: var(--navy); }
+    .vpat-meta dd { margin: 0; }
+    @media (max-width: 600px) {
+      .vpat-table { font-size: .82rem; }
+      .vpat-meta dl { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div id="site-header"></div>
+
+  <section class="page-hero">
+    <div class="container">
+      <p class="breadcrumb"><a href="/index.html">Home</a> / <a href="/accessibility.html">Accessibility</a> / Conformance Report</p>
+      <h1>Accessibility Conformance Report</h1>
+      <p>Voluntary Product Accessibility Template (VPAT&reg;) 2.4 — WCAG 2.1 Edition</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container prose" style="max-width:900px;">
+
+      <div class="vpat-meta">
+        <dl>
+          <dt>Product</dt>
+          <dd>filerfd.org — Filer Rural Fire District Website</dd>
+          <dt>Product Version</dt>
+          <dd>Current (static HTML site, continuously updated)</dd>
+          <dt>Report Date</dt>
+          <dd>August 2026</dd>
+          <dt>Last Updated</dt>
+          <dd>August 2026</dd>
+          <dt>Contact</dt>
+          <dd><a href="/contact.html">filerfd.org/contact</a> &nbsp;|&nbsp; <a href="tel:+12083264111">(208) 326-4111</a></dd>
+          <dt>Notes</dt>
+          <dd>This report covers all pages of the filerfd.org public website. Testing was conducted via manual code review, keyboard navigation testing, and automated tooling (axe-core / WAVE). Third-party embeds (Google Maps) are noted where applicable.</dd>
+        </dl>
+      </div>
+
+      <h2>Applicable Standards</h2>
+      <p>This report documents conformance with <strong>Web Content Accessibility Guidelines (WCAG) 2.1 Level AA</strong>, as required by the U.S. Department of Justice final rule under Title II of the Americans with Disabilities Act (ADA) for state and local government entities.</p>
+
+      <p><strong>Conformance levels used in this report:</strong></p>
+      <ul>
+        <li><span class="badge badge-supports">Supports</span> — The product meets the criterion without exception.</li>
+        <li><span class="badge badge-partial">Partially Supports</span> — The product meets the criterion in some but not all cases, or a known limitation exists.</li>
+        <li><span class="badge badge-na">Not Applicable</span> — The criterion is not relevant to this product.</li>
+      </ul>
+
+      <h2 class="section-heading">WCAG 2.1 — Principle 1: Perceivable</h2>
+      <p>Information and user interface components must be presentable to users in ways they can perceive.</p>
+
+      <div style="overflow-x:auto;">
+      <table class="vpat-table">
+        <thead>
+          <tr><th style="width:30%">Criterion</th><th style="width:16%">Level</th><th style="width:18%">Conformance</th><th>Remarks</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1.1.1 Non-text Content</td><td>A</td>
+            <td><span class="badge badge-supports">Supports</span></td>
+            <td>All images have descriptive alt text. Decorative emoji icons are marked <code>aria-hidden="true"</code>. The district logo has meaningful alt text.</td>
+          </tr>
+          <tr>
+            <td>1.2.1–1.2.5 Time-based Media</td><td>A/AA</td>
+            <td><span class="badge badge-na">Not Applicable</span></td>
+            <td>No audio or video content on the site.</td>
+          </tr>
+          <tr>
+            <td>1.3.1 Info and Relationships</td><td>A</td>
+            <td><span class="badge badge-supports">Supports</span></td>
+            <td>Semantic HTML used throughout. Headings, lists, tables, and form elements are properly structured. Form labels are programmatically associated with inputs.</td>
+          </tr>
+          <tr>
+            <td>1.3.2 Meaningful Sequence</td><td>A</td>
+            <td><span class="badge badge-supports">Supports</span></td>
+            <td>Reading and navigation order in the DOM matches the visual order.</td>
+          </tr>
+          <tr>
+            <td>1.3.3 Sensory Characteristics</td><td>A</td>
+            <td><span class="badge badge-supports">Supports</span></td>
+            <td>Instructions do not rely solely on shape, color, size, or location.</td>
+          </tr>
+          <tr>
+            <td>1.3.4 Orientation</td><td>AA</td>
+            <td><span class="badge badge-supports">Supports</span></td>
+            <td>Content is not locked to a single screen orientation.</td>
+          </tr>
+          <tr>
+            <td>1.3.5 Identify Input Purpose</td><td>AA</td>
+            <td><span class="badge badge-supports">Supports</span></td>
+            <td>Contact and volunteer form inputs use appropriate <code>autocomplete</code> attributes (name, email, tel).</td>
+          </tr>
+          <tr>
+            <td>1.4.1 Use of Color</td><td>A</td>
+            <td><span class="badge badge-supports">Supports</span></td>
+            <td>Color is not the sole means of conveying information. Active nav links use both color and underline.</td>
+          </tr>
+          <tr>
+            <td>1.4.2 Audio Control</td><td>A</td>
+            <td><span class="badge badge-na">Not Applicable</span></td>
+            <td>No auto-playing audio.</td>
+          </tr>
+          <tr>
+            <td>1.4.3 Contrast (Minimum)</td><td>AA</td>
+            <td><span class="badge badge-supports">Supports</span></td>
+            <td>Primary color palette (navy #1e3a5f on white, white on navy, red #cc2200 on white for large text) meets 4.5:1 for normal text and 3:1 for large text. Gray body text (#334155) on white exceeds 4.5:1.</td>
+          </tr>
+          <tr>
+            <td>1.4.4 Resize Text</td><td>AA</td>
+            <td><span class="badge badge-supports">Supports</span></td>
+            <td>Text can be resized up to 200% without loss of content or functionality. Layout uses relative units (rem/%).</td>
+          </tr>
+          <tr>
+            <td>1.4.5 Images of Text</td><td>AA</td>
+            <td><span class="badge badge-supports">Supports</span></td>
+            <td>No images of text used. All text is live HTML.</td>
+          </tr>
+          <tr>
+            <td>1.4.10 Reflow</td><td>AA</td>
+            <td><span class="badge badge-supports">Supports</span></td>
+            <td>Responsive design adapts to narrow viewports without horizontal scrolling. Wide content (tables) scrolls within its container.</td>
+          </tr>
+          <tr>
+            <td>1.4.11 Non-text Contrast</td><td>AA</td>
+            <td><span class="badge badge-supports">Supports</span></td>
+            <td>Form input borders and interactive UI components meet 3:1 contrast ratio against adjacent colors.</td>
+          </tr>
+          <tr>
+            <td>1.4.12 Text Spacing</td><td>AA</td>
+            <td><span class="badge badge-supports">Supports</span></td>
+            <td>No CSS overrides that would prevent text spacing adjustments from taking effect.</td>
+          </tr>
+          <tr>
+            <td>1.4.13 Content on Hover or Focus</td><td>AA</td>
+            <td><span class="badge badge-supports">Supports</span></td>
+            <td>Dropdown navigation is dismissible, hoverable, and persistent. No tooltip-only content.</td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+
+      <h2 class="section-heading">WCAG 2.1 — Principle 2: Operable</h2>
+      <p>User interface components and navigation must be operable.</p>
+
+      <div style="overflow-x:auto;">
+      <table class="vpat-table">
+        <thead>
+          <tr><th style="width:30%">Criterion</th><th style="width:16%">Level</th><th style="width:18%">Conformance</th><th>Remarks</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>2.1.1 Keyboard</td><td>A</td>
+            <td><span class="badge badge-supports">Supports</span></td>
+            <td>All interactive elements (nav links, buttons, form fields, FAQ accordion, lightbox, mobile nav) are keyboard accessible. No keyboard traps.</td>
+          </tr>
+          <tr>
+            <td>2.1.2 No Keyboard Trap</td><td>A</td>
+            <td><span class="badge badge-supports">Supports</span></td>
+            <td>Lightbox and mobile nav can be dismissed with the Escape key, returning focus to the trigger element.</td>
+          </tr>
+          <tr>
+            <td>2.1.4 Character Key Shortcuts</td><td>A</td>
+            <td><span class="badge badge-na">Not Applicable</span></td>
+            <td>No single-character keyboard shortcuts implemented.</td>
+          </tr>
+          <tr>
+            <td>2.2.1–2.2.2 Timing</td><td>A</td>
+            <td><span class="badge badge-na">Not Applicable</span></td>
+            <td>No time limits on any content or interaction.</td>
+          </tr>
+          <tr>
+            <td>2.3.1 Three Flashes</td><td>A</td>
+            <td><span class="badge badge-na">Not Applicable</span></td>
+            <td>No flashing content.</td>
+          </tr>
+          <tr>
+            <td>2.4.1 Bypass Blocks</td><td>A</td>
+            <td><span class="badge badge-partial">Partially Supports</span></td>
+            <td>Navigation is consistent across pages. A skip-to-main-content link has not been implemented but is a planned improvement.</td>
+          </tr>
+          <tr>
+            <td>2.4.2 Page Titled</td><td>A</td>
+            <td><span class="badge badge-supports">Supports</span></td>
+            <td>Every page has a unique, descriptive <code>&lt;title&gt;</code> including the page name and district name.</td>
+          </tr>
+          <tr>
+            <td>2.4.3 Focus Order</td><td>A</td>
+            <td><span class="badge badge-supports">Supports</span></td>
+            <td>Focus order follows a logical top-to-bottom, left-to-right sequence matching visual layout. Mobile nav and lightbox manage focus programmatically on open/close.</td>
+          </tr>
+          <tr>
+            <td>2.4.4 Link Purpose (In Context)</td><td>A</td>
+            <td><span class="badge badge-supports">Supports</span></td>
+            <td>Link text is descriptive. Icon-only links (Facebook) have <code>aria-label</code> attributes. "Read More" style links are not used.</td>
+          </tr>
+          <tr>
+            <td>2.4.5 Multiple Ways</td><td>AA</td>
+            <td><span class="badge badge-supports">Supports</span></td>
+            <td>Site navigation and footer links provide multiple ways to reach each page.</td>
+          </tr>
+          <tr>
+            <td>2.4.6 Headings and Labels</td><td>AA</td>
+            <td><span class="badge badge-supports">Supports</span></td>
+            <td>Headings are descriptive and consistent. Form labels accurately describe their fields.</td>
+          </tr>
+          <tr>
+            <td>2.4.7 Focus Visible</td><td>AA</td>
+            <td><span class="badge badge-supports">Supports</span></td>
+            <td>Browser default focus indicators are preserved. Interactive elements show visible focus outlines on keyboard navigation.</td>
+          </tr>
+          <tr>
+            <td>2.5.1–2.5.4 Pointer/Motion Gestures</td><td>A/AA</td>
+            <td><span class="badge badge-na">Not Applicable</span></td>
+            <td>No multipoint gestures or motion-activated functionality.</td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+
+      <h2 class="section-heading">WCAG 2.1 — Principle 3: Understandable</h2>
+      <p>Information and the operation of the user interface must be understandable.</p>
+
+      <div style="overflow-x:auto;">
+      <table class="vpat-table">
+        <thead>
+          <tr><th style="width:30%">Criterion</th><th style="width:16%">Level</th><th style="width:18%">Conformance</th><th>Remarks</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>3.1.1 Language of Page</td><td>A</td>
+            <td><span class="badge badge-supports">Supports</span></td>
+            <td>All pages declare <code>lang="en"</code> on the <code>&lt;html&gt;</code> element.</td>
+          </tr>
+          <tr>
+            <td>3.1.2 Language of Parts</td><td>AA</td>
+            <td><span class="badge badge-na">Not Applicable</span></td>
+            <td>No content in languages other than English.</td>
+          </tr>
+          <tr>
+            <td>3.2.1–3.2.2 On Focus / On Input</td><td>A</td>
+            <td><span class="badge badge-supports">Supports</span></td>
+            <td>No unexpected context changes occur on focus or input. Form submission requires explicit button activation.</td>
+          </tr>
+          <tr>
+            <td>3.2.3 Consistent Navigation</td><td>AA</td>
+            <td><span class="badge badge-supports">Supports</span></td>
+            <td>Header navigation and footer are identical across all pages, loaded from a shared component.</td>
+          </tr>
+          <tr>
+            <td>3.2.4 Consistent Identification</td><td>AA</td>
+            <td><span class="badge badge-supports">Supports</span></td>
+            <td>Components with the same function are identified consistently across pages.</td>
+          </tr>
+          <tr>
+            <td>3.3.1 Error Identification</td><td>A</td>
+            <td><span class="badge badge-supports">Supports</span></td>
+            <td>Required form fields are marked with <code>required</code> and <code>aria-required="true"</code>. Browser-native validation identifies errors.</td>
+          </tr>
+          <tr>
+            <td>3.3.2 Labels or Instructions</td><td>A</td>
+            <td><span class="badge badge-supports">Supports</span></td>
+            <td>All form fields have visible labels. Required fields are indicated both visually and programmatically.</td>
+          </tr>
+          <tr>
+            <td>3.3.3 Error Suggestion</td><td>AA</td>
+            <td><span class="badge badge-supports">Supports</span></td>
+            <td>Browser-native validation provides error suggestions for incorrectly completed fields (e.g. invalid email format).</td>
+          </tr>
+          <tr>
+            <td>3.3.4 Error Prevention</td><td>AA</td>
+            <td><span class="badge badge-supports">Supports</span></td>
+            <td>Contact and volunteer forms require confirmation via submit button. No irreversible transactions on the site.</td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+
+      <h2 class="section-heading">WCAG 2.1 — Principle 4: Robust</h2>
+      <p>Content must be robust enough to be interpreted by a wide variety of user agents, including assistive technologies.</p>
+
+      <div style="overflow-x:auto;">
+      <table class="vpat-table">
+        <thead>
+          <tr><th style="width:30%">Criterion</th><th style="width:16%">Level</th><th style="width:18%">Conformance</th><th>Remarks</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>4.1.1 Parsing</td><td>A</td>
+            <td><span class="badge badge-supports">Supports</span></td>
+            <td>HTML is well-formed with no duplicate IDs or improperly nested elements.</td>
+          </tr>
+          <tr>
+            <td>4.1.2 Name, Role, Value</td><td>A</td>
+            <td><span class="badge badge-supports">Supports</span></td>
+            <td>All interactive elements use native HTML elements with appropriate roles. Custom components (mobile nav, FAQ accordion, lightbox) use ARIA attributes (<code>aria-expanded</code>, <code>aria-modal</code>, <code>role="dialog"</code>) to communicate state.</td>
+          </tr>
+          <tr>
+            <td>4.1.3 Status Messages</td><td>AA</td>
+            <td><span class="badge badge-supports">Supports</span></td>
+            <td>Form submission success messages use <code>role="alert"</code> and <code>aria-live="polite"</code> so screen readers announce them without requiring focus.</td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+
+      <h2 class="section-heading">Known Limitations</h2>
+      <ul>
+        <li><strong>2.4.1 Bypass Blocks</strong> — A skip-to-main-content link is not currently present. This is a planned improvement.</li>
+        <li><strong>Third-party embeds</strong> — The Google Maps embed on the Contact page is provided by Google and may have accessibility limitations outside the district's control. The iframe has a descriptive <code>title</code> attribute to provide context to screen reader users.</li>
+        <li><strong>PDFs</strong> — Any PDF documents linked from the site (meeting agendas, budget documents) should be accessible. The district is advised to ensure documents are properly tagged before posting.</li>
+      </ul>
+
+      <h2 class="section-heading">Testing Methodology</h2>
+      <ul>
+        <li>Manual code review of all HTML pages against WCAG 2.1 AA success criteria</li>
+        <li>Keyboard navigation testing across all interactive elements and pages</li>
+        <li>Automated testing using WAVE (WebAIM) and axe-core</li>
+        <li>Visual review across desktop and mobile viewports</li>
+        <li>Screen reader spot-check using macOS VoiceOver</li>
+      </ul>
+
+      <h2 class="section-heading">Report Contact</h2>
+      <p>To report an accessibility issue or request this information in an alternative format:</p>
+      <ul>
+        <li><strong>Phone:</strong> <a href="tel:+12083264111">(208) 326-4111</a></li>
+        <li><strong>Online:</strong> <a href="/contact.html">Contact form</a></li>
+        <li><strong>Mail:</strong> 100 US-30, Filer, ID 83328</li>
+      </ul>
+      <p>See also: <a href="/accessibility.html">Accessibility Statement</a></p>
+
+    </div>
+  </section>
+
+  <div id="site-footer"></div>
+  <script src="/js/components.js"></script>
+  <script src="/js/main.js"></script>
+</body>
+</html>
