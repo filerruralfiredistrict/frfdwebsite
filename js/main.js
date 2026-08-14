@@ -8,11 +8,14 @@ document.addEventListener('DOMContentLoaded', () => {
       nav.classList.add('open');
       hamburger.setAttribute('aria-expanded', 'true');
       document.body.style.overflow = 'hidden';
+      const firstLink = nav.querySelector('a');
+      if (firstLink) firstLink.focus();
     };
     const closeNav = () => {
       nav.classList.remove('open');
       hamburger.setAttribute('aria-expanded', 'false');
       document.body.style.overflow = '';
+      hamburger.focus();
     };
 
     hamburger.addEventListener('click', () => {
@@ -77,21 +80,25 @@ document.addEventListener('DOMContentLoaded', () => {
   const lightboxImg = document.getElementById('lightbox-img');
   const lightboxClose = document.getElementById('lightbox-close');
   if (lightbox && lightboxImg) {
-    const openLightbox = (src, alt) => {
+    let lastTrigger = null;
+    const openLightbox = (src, alt, trigger) => {
+      lastTrigger = trigger;
       lightboxImg.src = src;
       lightboxImg.alt = alt;
       lightbox.classList.add('open');
       document.body.style.overflow = 'hidden';
+      lightboxClose.focus();
     };
     const closeLightbox = () => {
       lightbox.classList.remove('open');
       document.body.style.overflow = '';
       lightboxImg.src = '';
+      if (lastTrigger) lastTrigger.focus();
     };
     document.querySelectorAll('.lightbox-trigger').forEach(btn => {
       btn.addEventListener('click', () => {
         const img = btn.querySelector('img');
-        openLightbox(img.src, img.alt);
+        openLightbox(img.src, img.alt, btn);
       });
     });
     lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
