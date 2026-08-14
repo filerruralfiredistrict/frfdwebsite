@@ -35,7 +35,7 @@ function formatDate(str) {
 // ── Render cards into a container ──────────────────────────
 function renderCards(posts, el) {
   if (!posts.length) {
-    el.innerHTML = '<p style="color:#64748b">No updates yet — check back soon.</p>';
+    el.innerHTML = '<p style="color:#4b6070">No updates yet — check back soon.</p>';
     return;
   }
   el.innerHTML = posts.map(post => `
@@ -43,7 +43,7 @@ function renderCards(posts, el) {
       ${post.image
         ? `<img class="news-card-img" src="${post.image}" alt="${post.title}" loading="lazy">`
         : `<div class="news-card-img" style="display:flex;align-items:center;justify-content:center;background:#f4f6f8;">
-             <svg width="48" height="48" viewBox="0 0 24 24" fill="#A8B8C4"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+             <svg width="48" height="48" viewBox="0 0 24 24" fill="#4b6070"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
            </div>`
       }
       <div class="news-card-body">
@@ -62,7 +62,7 @@ async function loadNews(options = {}) {
   if (!containers.length) return;
 
   containers.forEach(el => {
-    el.innerHTML = '<p style="color:#64748b;padding:1rem 0;">Loading updates…</p>';
+    el.innerHTML = '<p style="color:#4b6070;padding:1rem 0;">Loading updates…</p>';
   });
 
   try {
@@ -106,7 +106,7 @@ async function loadNews(options = {}) {
   } catch (err) {
     console.error('News load error:', err);
     containers.forEach(el => {
-      el.innerHTML = '<p style="color:#64748b">Unable to load updates at this time.</p>';
+      el.innerHTML = '<p style="color:#4b6070">Unable to load updates at this time.</p>';
     });
   }
 }
