@@ -25,8 +25,13 @@
       <h2>Annual Budget</h2>
       <p>The district budget is approved by the Board of Fire Commissioners each September at the start of the new fiscal year. Budget documents are posted to Google Drive following board approval.</p>
       <ul>
-        <li><a href="https://drive.google.com/drive/folders/1c5FJw5QqRctPX-mh5wNPNDAONZbSQmrH?usp=sharing" target="_blank" rel="noopener">&#128193; Budget &amp; Financial Documents (Google Drive)</a></li>
+        <li><a id="budget-docs-link" href="https://drive.google.com/drive/folders/1c5FJw5QqRctPX-mh5wNPNDAONZbSQmrH?usp=sharing" target="_blank" rel="noopener">&#128193; Budget &amp; Financial Documents</a></li>
       </ul>
+      <script>
+        fetch('/data/site-settings.json').then(r => r.json()).then(s => {
+          if (s.budget_url) document.getElementById('budget-docs-link').href = s.budget_url;
+        }).catch(() => {});
+      </script>
 
       <h2>Meeting Agendas</h2>
       <p>Board meeting agendas are posted at least 2 days prior to each meeting. See the <a href="/governance.html#board-meetings">Governance page</a> for links to all agendas by year.</p>

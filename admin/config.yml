@@ -145,6 +145,15 @@ collections:
                 required: false
                 hint: "Optional headshot or uniform photo"
 
+      - label: Site Settings
+        name: site_settings
+        file: data/site-settings.json
+        fields:
+          - label: Budget & Financial Documents URL
+            name: budget_url
+            widget: string
+            hint: "Shareable link to the budget/financial documents folder (Google Drive or OneDrive)"
+
       - label: Meeting Year Folders
         name: meeting_years
         file: data/meeting-years.json
@@ -158,7 +167,7 @@ collections:
                 name: year
                 widget: string
                 hint: "e.g. 2027"
-              - label: Google Drive Folder URL
+              - label: Folder URL
                 name: url
                 widget: string
-                hint: "Shareable Google Drive folder link for this year's agendas"
+                hint: "Shareable link to this year's agenda folder (Google Drive or OneDrive)"
